@@ -10,7 +10,9 @@ class Template extends Component {
         <Row className="show-grid">
           <Col className="center-block">
             <PageHeader className="center-text">Business System Planning</PageHeader>
-            <div id="content"></div>
+            <div>
+              {this.props.children}
+            </div>
           </Col>
         </Row>
       </Grid>

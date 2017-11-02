@@ -13,7 +13,12 @@ class Template extends Component {
           </Col>
           <Col md={9} sm={9} xs={9} className="">
             <PageHeader className="center-text">Business System Planning</PageHeader>
-            <div id="content"></div>
+            <div>
+            asd
+              {console.log(this.props)}
+              {this.props.children}
+              {console.log(this.props)}
+            </div>
           </Col>
         </Row>
       </Grid>

@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 
-class Login extends Component {
+class Register extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      rePassword: ''
     }
-
-    this.redirectRegister = this.redirectRegister.bind(this);
-  }
-
-  redirectRegister() {
-    this.props.history.push('./register')
   }
 
   render() {
@@ -36,14 +31,20 @@ class Login extends Component {
                 value=''
                 placeholder="Enter Password"
               />
+
+              <ControlLabel>Repeat Password</ControlLabel>
+              <FormControl
+                type="text"
+                value=''
+                placeholder="Enter Password"
+              />
               <FormControl.Feedback />
             </FormGroup>
           </form>
-          <Button bsStyle='danger' bsSize='large' block>Login</Button>
-          <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister} block>Register</Button>
+          <Button bsStyle='danger' bsSize='large' block>Register</Button>
         </Well>
     );
   }
 }
 
-export default Login;
+export default Register;
