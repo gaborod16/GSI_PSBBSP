@@ -5,12 +5,14 @@ import './template.css';
 
 import Login from './loginForm';
 import Register from './register';
+import MainPage from './mainpage';
 
 const Content = () => (
   <Grid fluid>
     <Switch>
       <Route path={'/'} exact component={Login}></Route>
       <Route path={'/register'} exact component={Register}></Route>
+      <Route path={'/main'} exact component={MainPage}></Route>
     </Switch>
   </Grid>
 )
