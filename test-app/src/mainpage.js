@@ -1,52 +1,41 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import {Button, Well, FormControl, FormGroup, ControlLabel, ButtonToolbar} from 'react-bootstrap';
 
 
-class mainpage extends Component {
+import ReactDOM from "react-dom"
 
-  constructor() {
-   
-  }
 
-  render() {
-     
+class Mainpage extends React.Component {
+    
+render() {
+      //console.log("fyy");
     return (
         
-       const navbarInstance = (
-  <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <NavItem eventKey={1} href="#">Link</NavItem>
-        <NavItem eventKey={2} href="#">Link</NavItem>
-        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-          <MenuItem eventKey={3.1}>Action</MenuItem>
-          <MenuItem eventKey={3.2}>Another action</MenuItem>
-          <MenuItem eventKey={3.3}>Something else here</MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey={3.3}>Separated link</MenuItem>
-        </NavDropdown>
-      </Nav>
-      <Nav pullRight>
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-);
-      
-ReactDOM.render(navbarInstance, mountNode);
+     
+            <h2> Isto só devia aparecer após o click no login </h2>
+       
+        
+  
     );
+    
+
+  
+//console.log("fyy");
   }
     
-     console.log("fyy");
+     
 }
 
-export default maipage;
 
+/*
+class Tentativa extends React.Component{
+    render(){
+        return(
+            <h2> Funciona  </h2>
+        );
+    }
+} */
 
+    const appl = document.getElementById('fy');
+ ReactDOM.render(<Mainpage/>,appl);
+export default Mainpage;
