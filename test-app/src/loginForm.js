@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 

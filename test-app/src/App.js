@@ -12,7 +12,7 @@ const Content = () => (
     <Switch>
       <Route path={'/'} exact component={Login}></Route>
       <Route path={'/register'} exact component={Register}></Route>
-      <Route path={'/main'} exact component={MainPage}></Route>
+      <Route path={'/mainpage'} exact component={MainPage}></Route>
     </Switch>
   </Grid>
 )
