@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import {PageHeader, Form, Col, Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -25,34 +25,51 @@ class Login extends Component {
 
   render() {
     return (
-        <Well className="center-block" bsSize='large'>
-          <form>
-          <FormGroup controlId="formBasicText">
-              <ControlLabel>Username</ControlLabel>
-              <FormControl
-                type="text"
-                //value=''
-         defaultValue="" //com deafultvalue fica alteravel
-                placeholder="Enter Username"
-              />
-              <FormControl.Feedback />
-
-              <ControlLabel>Password</ControlLabel>
-              <FormControl 
-                className="testing"
-                type="text"
-                //value=''
-        defaultValue=""
-                placeholder="Enter Password"
         
-                
-              />
+        <Well bsSize='large'>
+          <Col smOffset={2}>
+            <PageHeader><small>Login form</small></PageHeader>
+          </Col>
+          <Form horizontal>
+            <FormGroup controlId="formEmail">
+              <Col componentClass={ControlLabel} sm={2}>
+                E-mail
+              </Col>
+              <Col sm={10}>
+                <FormControl
+                  type="text"
+                  defaultValue="" //com deafultvalue fica alteravel
+                  placeholder="Enter Username"
+                />
+              </Col>
+                <FormControl.Feedback />
+            </FormGroup>
+            <FormGroup controlId="formPassword">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={10}>
+                <FormControl 
+                  type="text"
+                  defaultValue=""
+                  placeholder="Enter Password"
+                />
+              </Col>
               <FormControl.Feedback />
             </FormGroup>
-          </form>
-        
-          <Button bsStyle='danger' bsSize='large' onClick={this.redirectmainpage}  block>Login</Button>
-          <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister} block>Register</Button>
+            <FormGroup>
+              <Col smOffset={2} sm={2}>
+                <Button type="submit" bsStyle='danger' bsSize='large' onClick={this.redirectmainpage}>
+                  Login
+                </Button>
+              </Col>
+              <Col sm={8}>
+                <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister}>
+                  Register
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
         </Well>
     );
   }
