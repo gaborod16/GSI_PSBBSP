@@ -1,51 +1,7 @@
-/*
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel, ButtonToolbar} from 'react-bootstrap';
+import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col} from 'react-bootstrap';
 
-
-import ReactDOM from "react-dom"
-
-
-class Mainpage extends React.Component {
-    
-render() {
-      //console.log("fyy");
-    return (
-        
-     
-            <h2> Isto só devia aparecer após o click no login </h2>
-       
-        
-  
-    );
-    
-
-  
-//console.log("fyy");
-  }
-    
-     
-}
-
-
-/*
-class Tentativa extends React.Component{
-    render(){
-        return(
-            <h2> Funciona  </h2>
-        );
-    }
-} */
-
-/*
-
-    const appl = document.getElementById('root');
- ReactDOM.render(<Mainpage/>,appl);
-export default Mainpage;
-*/
-
-import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import Template from './template';
 
 class MainPage extends Component {
 
@@ -55,32 +11,20 @@ class MainPage extends Component {
       user: ''
     }
     
-        this.redirectnewbsp = this.redirectnewbsp.bind(this);
-        this.redirectprojectpage = this.redirectprojectpage.bind(this);
+    this.redirectNewProject = this.redirectNewProject.bind(this);
+    this.redirectProjectPage = this.redirectProjectPage.bind(this);
   }
     
-     redirectnewbsp() {
-       
-    this.props.history.push('./newbsp')
+  redirectNewProject() {
+    this.props.history.push('./newProject')
   }
     
-    redirectprojectpage() {
-       
-    this.props.history.push('./projectpage')
+  redirectProjectPage() {
+    this.props.history.push('./projectPage')
   }
    
 
   render() {
-      
-      var estilo_menu ={
-          
-          height: "500px",
-          width: "30%",
-          backgroundColor: "#f04f57",
-          marginLeft: "-34%",
-          marginTop: "3%",
-          borderRadius: "15px"
-     }
       
       var container_username={
           textAlign: "center",
@@ -156,43 +100,22 @@ class MainPage extends Component {
        }
        
     return (
-        
-    <div>    
-      <div style={estilo_menu} >
-        
-        <div style={container_username}>
-        <h2 style={username}> John Surname 
-        </h2>
-        </div>
-       
-      </div>
-        
-        
-        <div style={botao_new_bsp}  onClick={this.redirectnewbsp}>
-         <h2 style={plus}> + 
-        </h2>
-        </div>
-        
-        
-        <div style={container_bsps}>
-        <h2 style={info_bsp}> Your BSP Projects
-        </h2>
-        
-        <div  style={lista_bsps}>    
-         <h2 style={project_text} onClick={this.redirectprojectpage}> Project #1
-        </h2>
-        </div>
-        
-        <div  style={lista_bsps} onClick={this.redirectprojectpage}>    
-         <h2 style={project_text}> Project #2
-        </h2>
-        </div>
-        
-        </div>
-        
-    </div>    
-        
-       
+      
+      <Template>
+        <Row> 
+          <Col md={3} sm={4} onClick={this.redirectNewProject}>
+            <h2> + <small>Create New Project</small></h2>
+          </Col>
+
+          <Col lg={6} md={7} sm={8}>
+            <h2 className="center-text"> Your BSP Projects</h2>
+            
+            <Button bsStyle='warning' bsSize='medium' onClick={this.redirectProjectPage} block><h4>Project #1</h4></Button>
+            <Button bsStyle='warning' bsSize='medium' onClick={this.redirectProjectPage} block><h4>Project #2</h4></Button>
+            
+          </Col>
+        </Row>
+      </Template>
        
        
     );

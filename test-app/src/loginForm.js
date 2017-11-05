@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import {Button, Well, Col, Form, PageHeader, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+
+import TemplateSimple from './template-no-sidebar';
 
 class Login extends Component {
 
@@ -18,42 +20,60 @@ class Login extends Component {
     this.props.history.push('./register')
   }
     
-     redirectmainpage() {
-       
+  redirectmainpage() {     
     this.props.history.push('./mainpage')
   }
 
   render() {
     return (
-        <Well className="center-block" bsSize='large'>
-          <form>
-          <FormGroup controlId="formBasicText">
-              <ControlLabel>Username</ControlLabel>
-              <FormControl
-                type="text"
-                //value=''
-         defaultValue="" //com deafultvalue fica alteravel
-                placeholder="Enter Username"
-              />
-              <FormControl.Feedback />
+        <TemplateSimple>
+          <Well bsSize='large'>
+            <Col smOffset={2}>
+              <PageHeader><small>Login form</small></PageHeader>
+            </Col>
+            <Form horizontal>
+              <FormGroup controlId="formEmail">
+                <Col componentClass={ControlLabel} sm={2}>
+                  E-mail
+                </Col>
+                <Col sm={10}>
+                  <FormControl
+                    type="text"
+                    defaultValue="" //com deafultvalue fica alteravel
+                    placeholder="Enter Username"
+                  />
+                </Col>
+                  <FormControl.Feedback />
+              </FormGroup>
+              <FormGroup controlId="formPassword">
+                <Col componentClass={ControlLabel} sm={2}>
+                  Password
+                </Col>
+                <Col sm={10}>
+                  <FormControl 
+                    type="text"
+                    defaultValue=""
+                    placeholder="Enter Password"
+                  />
+                </Col>
+                <FormControl.Feedback />
+              </FormGroup>
 
-              <ControlLabel>Password</ControlLabel>
-              <FormControl 
-                className="testing"
-                type="text"
-                //value=''
-        defaultValue=""
-                placeholder="Enter Password"
-        
-                
-              />
-              <FormControl.Feedback />
-            </FormGroup>
-          </form>
-        
-          <Button bsStyle='danger' bsSize='large' onClick={this.redirectmainpage}  block>Login</Button>
-          <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister} block>Register</Button>
-        </Well>
+              <FormGroup>
+                <Col smOffset={2} sm={4} md={3}>
+                  <Button type="submit" bsStyle='danger' bsSize='large' onClick={this.redirectmainpage} block>
+                    Login
+                  </Button>
+                </Col>
+                <Col sm={4} md={3}>
+                  <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister} block>
+                    Register
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </Well>
+        </TemplateSimple>
     );
   }
 }

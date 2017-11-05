@@ -1,35 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { PageHeader, Col, Grid, Row} from 'react-bootstrap';
 import {Switch, Route} from 'react-router-dom';
+
 import './template.css';
 
 import Login from './loginForm';
 import Register from './register';
-import MainPage from './mainpage';
-import NewBsp from './newbsp';
-import ProjectPage from './projectpage';
+import MainPage from './mainPage';
+import NewProject from './newProject';
+import ProjectPage from './projectPage';
 
-const Content = () => (
-  <Grid fluid>
-    <Switch>
-      <Route path={'/'} exact component={Login}></Route>
-      <Route path={'/register'} exact component={Register}></Route>
-      <Route path={'/mainpage'} exact component={MainPage}></Route>
-     <Route path={'/newbsp'} exact component={NewBsp}></Route>
-      <Route path={'/projectpage'} exact component={ProjectPage}></Route>
-    </Switch>
-  </Grid>
-)
+class Content extends Component {
+  render() {
+    return (
+        <Switch>
+          <Route path={'/'} exact component={Login}></Route>
+          <Route path={'/register'} exact component={Register}></Route>
+          <Route path={'/mainPage'} exact component={MainPage}></Route>
+          <Route path={'/newProject'} exact component={NewProject}></Route>
+          <Route path={'/projectPage'} exact component={ProjectPage}></Route>
+        </Switch>
+    );
+  }
+}
 
-const App = () => (
-  <Grid fluid>
-    <Row className="show-grid">
-      <Col className="center-block">
-        <PageHeader className="center-text">Business System Planning</PageHeader>
+class App extends Component {
+  render() {
+
+    return (
+      <Grid fluid>
+        <Row>
+          <PageHeader className="center-text">Business System Planning</PageHeader>
+        </Row>
         <Content/>
-      </Col>
-    </Row>
-  </Grid>
-)
+      </Grid>
+    );
+  }
+}
 
 export default App;

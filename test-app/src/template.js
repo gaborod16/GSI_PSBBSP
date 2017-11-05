@@ -2,26 +2,32 @@ import React, { Component } from 'react';
 import { PageHeader, Col, Grid, Row} from 'react-bootstrap';
 import './template.css';
 
+
+class SideBar extends Component {
+  render() {
+    if (true) {
+      return (
+        <Col lg={2} md={3} sm={3} xs={3}>
+          <div id="menu">
+            <h4 id="menu-header">User Information</h4>
+            <hr/>
+          </div>
+        </Col>
+      );
+    }
+  }
+}
+
 class Template extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row className="show-grid">
-          <Col id="menu" md={3} sm={3} xs={3}>
-            <h3 id="menu-header">User Information</h3>
-          </Col>
-          <Col md={9} sm={9} xs={9} className="">
-            <PageHeader className="center-text">Business System Planning</PageHeader>
-            <div>
-            asd
-              {console.log(this.props)}
-              {this.props.children}
-              {console.log(this.props)}
-            </div>
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <SideBar/>
+        <Col lg={10} md={9} sm={9} xs={9}>
+          {this.props.children}
+        </Col>
+      </Row>
     );
   }
 }
