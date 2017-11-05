@@ -47,7 +47,7 @@ export default Mainpage;
 import React, { Component } from 'react';
 import {Button, Well, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 
-class MainPage extends Component {
+class ProjectPage extends Component {
 
   constructor() {
     super();
@@ -55,24 +55,15 @@ class MainPage extends Component {
       user: ''
     }
     
-        this.redirectnewbsp = this.redirectnewbsp.bind(this);
-        this.redirectprojectpage = this.redirectprojectpage.bind(this);
+       
   }
     
-     redirectnewbsp() {
-       
-    this.props.history.push('./newbsp')
-  }
     
-    redirectprojectpage() {
-       
-    this.props.history.push('./projectpage')
-  }
    
 
   render() {
-      
-      var estilo_menu ={
+
+       var estilo_menu ={
           
           height: "500px",
           width: "30%",
@@ -94,11 +85,11 @@ class MainPage extends Component {
           opacity: "0.9"
       }
       
-      var botao_new_bsp = {
-          backgroundColor: "red",
+         var botao_new_bsp = {
+          
           width: "70px",
           height: "70px",
-          marginTop: "-60%",
+          marginTop: "-50%",
           marginLeft: "10%",
           borderRadius: "100px",
           border: "1px solid white",
@@ -115,79 +106,85 @@ class MainPage extends Component {
           marginTop: "10px"
       }
       
-       var container_bsps ={
-          
-          height: "200px",
-          width: "40%",
-          border: "2px solid white",
-          borderStyle: "dotted", 
-          marginLeft: "32%",
-          marginTop: "-9%",
-          borderRadius: "15px",
-           textAlign: "center"
-     }
+       var container_projname ={
+         
+           marginTop: "-30%",
+           width: "30%"
+      }
        
-       var info_bsp={
-          fontSize: "25px",
+        var seeing ={
+          fontSize: "18px",
           fontWeight: "lighter",
           color: "white",
           opacity: "0.9",
-           marginTop: "-13%",
-           
-       }
-       
-       var lista_bsps={
-             borderRadius: "15px",
-           textAlign: "center",
-           backgroundColor: "#f8c97f",
-           width: "80%",
-           height: "20%",
           
-           margin: "auto",
-           textAlign: "center"
-       }
-      
-       var project_text = {
-             fontSize: "25px",
+      }
+        
+         var proj_name ={
+          fontSize: "30px",
           fontWeight: "bold",
           color: "white",
-          opacity: "0.9",
+          opacity: "1",
+             marginTop: "-10px"
           
-       }
-       
+      }
+         
+          var members_container ={
+          width: "200px",
+          height: "100px",
+          float: "right",
+          marginRight: "-30%",
+          textAlign: "center",
+          borderBottom: "1px solid white",      
+              
+          
+      }
+          
+           var botao_add_member = {
+          backgroundColor: "blue",
+          width: "70px",
+          height: "70px",
+          borderRadius: "100px",
+          border: "1px solid white",
+          backgroundColor: "#c3c3c9",
+          textAlign: "center",
+               margin: "auto",
+
+          
+      }
+      
     return (
         
-    <div>    
-      <div style={estilo_menu} >
+    <div>   
+        
+        
+        <div style={estilo_menu} >
         
         <div style={container_username}>
         <h2 style={username}> John Surname 
         </h2>
         </div>
        
-      </div>
+      </div>        
         
         
-        <div style={botao_new_bsp}  onClick={this.redirectnewbsp}>
+        
+         <div style={botao_new_bsp}  >
          <h2 style={plus}> + 
         </h2>
         </div>
         
+          
         
-        <div style={container_bsps}>
-        <h2 style={info_bsp}> Your BSP Projects
-        </h2>
-        
-        <div  style={lista_bsps}>    
-         <h2 style={project_text} onClick={this.redirectprojectpage}> Project #1
-        </h2>
+        <div style={container_projname}>
+        <h2 style={seeing}> You're seeing  </h2>
+        <h2 style={proj_name}> Project #x   </h2>
         </div>
         
-        <div  style={lista_bsps} onClick={this.redirectprojectpage}>    
-         <h2 style={project_text}> Project #2
-        </h2>
-        </div>
+        <div style={members_container}>
+         <div style={botao_add_member}> Add Member
         
+        </div>
         </div>
         
     </div>    
@@ -200,4 +197,4 @@ class MainPage extends Component {
 }
 
 
-export default MainPage;
+export default ProjectPage;

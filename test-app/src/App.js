@@ -6,6 +6,8 @@ import './template.css';
 import Login from './loginForm';
 import Register from './register';
 import MainPage from './mainpage';
+import NewBsp from './newbsp';
+import ProjectPage from './projectpage';
 
 const Content = () => (
   <Grid fluid>
@@ -13,6 +15,8 @@ const Content = () => (
       <Route path={'/'} exact component={Login}></Route>
       <Route path={'/register'} exact component={Register}></Route>
       <Route path={'/mainpage'} exact component={MainPage}></Route>
+     <Route path={'/newbsp'} exact component={NewBsp}></Route>
+      <Route path={'/projectpage'} exact component={ProjectPage}></Route>
     </Switch>
   </Grid>
 )
