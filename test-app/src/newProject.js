@@ -14,13 +14,13 @@ class NewProject extends Component {
   }
     
   redirectmainpage() {
-    this.props.history.push('./mainpage')
+    this.props.history.push('./')
   }
    
 
   render() {
     return (
-      <Template>
+      <Template history={this.props.history}>
         <Col md={10}>
           <Well bsSize='large'>
             <Form horizontal>

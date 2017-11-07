@@ -27,13 +27,13 @@ class MainPage extends Component {
   render() {
     return (
       
-      <Template>
+      <Template history={this.props.history}>
         <Row> 
-          <Col md={3} sm={4}>
-            <Col>
-              <Image src="assets/plus.png" circle className="small-image" onClick={this.redirectNewProject}/>
+          <Col md={3} sm={4} className="circle-create-col">
+            <Col sm={4} md={3}>
+              <Image src="assets/plus.png" circle className="circle-create-button" onClick={this.redirectNewProject}/>
             </Col>
-            <Col>
+            <Col sm={8} md={5} className="circle-create-text">
               <h5>Create New Project</h5>
             </Col>
           </Col>
