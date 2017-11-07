@@ -10,10 +10,10 @@ class NewProject extends Component {
     this.state = {
       user: ''
     }
-    this.redirectmainpage = this.redirectmainpage.bind(this);
+    this.redirectMainPage = this.redirectMainPage.bind(this);
   }
     
-  redirectmainpage() {
+  redirectMainPage() {
     this.props.history.push('./')
   }
    
@@ -67,7 +67,7 @@ class NewProject extends Component {
 
               <FormGroup>
                 <Col smOffset={3} sm={3}>
-                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectmainpage}>Create</Button>
+                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectMainPage}>Create</Button>
                 </Col>
               </FormGroup>
             </Form>

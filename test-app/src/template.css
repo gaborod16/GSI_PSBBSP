@@ -1,3 +1,24 @@
+/* Colours */
+.bg-gray {
+	background-color: #E3E3E3;
+}
+
+.bg-blue{
+    background-color: blue;
+}
+
+.bg-green{
+    background-color: green;
+}
+
+.red {
+	color: red;
+}
+
+.yellow {
+	color: #dfc12a;
+}
+
 #menu {
 	padding-top: 4em;
 	padding-bottom: 1em;
@@ -10,10 +31,6 @@
 
 #menu-header {
 	text-align: center;
-}
-
-.gray {
-	background-color: #E3E3E3;
 }
 
 .center-text {
@@ -36,7 +53,7 @@
 }
 
 .circle-create-col {
-	margin-top: 5em;
+
 }
 
 .circle-create-row {

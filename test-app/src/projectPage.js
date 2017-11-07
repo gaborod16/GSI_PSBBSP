@@ -23,7 +23,6 @@ class ProjectPage extends Component {
           fontSize: "18px",
           fontWeight: "lighter",
           opacity: "0.9",
-          
       }
         
          var proj_name ={
