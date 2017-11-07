@@ -9,7 +9,13 @@ class ProjectPage extends Component {
     super();
     this.state = {
       user: ''
-    } 
+    }
+    
+       this.redirectNewProcess = this.redirectNewProcess.bind(this);
+  }
+    
+    redirectNewProcess() {     
+    this.props.history.push('./NewProcess')
   }
   
   render() {
@@ -44,7 +50,7 @@ class ProjectPage extends Component {
         </Row> 
         <Row> 
           <Col md={3} sm={4}>
-            <h2> + <small>Create New Process</small></h2>
+            <h2 onClick={this.redirectNewProcess} > + <small>Create New Process</small></h2>
           </Col>
 
           <Col md={7} sm={5}>

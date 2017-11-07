@@ -9,6 +9,8 @@ import Register from './register';
 import MainPage from './mainPage';
 import NewProject from './newProject';
 import ProjectPage from './projectPage';
+import NewProcess from './newProcess';
+import ShowMatrix from './showMatrix';
 
 class Content extends Component {
   render() {
@@ -19,6 +21,8 @@ class Content extends Component {
           <Route path={'/mainPage'} exact component={MainPage}></Route>
           <Route path={'/newProject'} exact component={NewProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
+          <Route path={'/newProcess'} exact component={NewProcess}></Route>
+          <Route path={'/showMatrix'} exact component={ShowMatrix}></Route>
         </Switch>
     );
   }
