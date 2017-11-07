@@ -1,6 +1,6 @@
 #menu {
 	padding-top: 4em;
-	padding-bottom: 5em;
+	padding-bottom: 1em;
 	padding-left: 1em;
 	padding-right: 1em;
 	background-color: #f04f57;
@@ -10,15 +10,6 @@
 
 #menu-header {
 	text-align: center;
-}
-
-.small-image {
-	min-width: 50px;
-	min-height: 50px;
-	max-width: 100px;
-	max-height: 100px;
-	width: 25%;
-	height: 25%;
 }
 
 .gray {
@@ -35,34 +26,58 @@
 	max-width: 800px;
 }
 
- .tabela{
-           border: "1px solid black";
-           border-collapse: "collapse";      
-          
-      }
+.circle-create-button {
+	min-width: 50px;
+	min-height: 50px;
+	max-width: 100px;
+	max-height: 100px;
+	width: 25%;
+	height: 25%;
+}
+
+.circle-create-col {
+	margin-top: 5em;
+}
+
+.circle-create-row {
+	margin-bottom: 1em;
+}
+
+.circle-create-text {
+	
+}
+
+.tabela{
+   border: "1px solid black";
+   border-collapse: "collapse";      
+}
 
 table {
     width:100%;
 }
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
 th, td {
     padding: 5px;
     text-align: center;
 }
+
 table#t01 tr:nth-child(even) {
     background-color: #eee;
 }
+
 table#t01 tr:nth-child(odd) {
    background-color:#fff;
 }
+
 table#t01 th {
     background-color: black;
     color: white;
 }
-
 
 .processesdatacontainer{
    
@@ -103,10 +118,4 @@ table#t01 th {
    
     float: right;
     margin-right: -20%;
-    
-   
-}
-
-.green{
-    background-color: green;
 }

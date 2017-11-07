@@ -57,67 +57,36 @@ class NewProcess extends Component {
           </Col>
 
           <Col md={7} sm={5}>
-      <div className="processesdatacontainer">        
-        <div className="processoslista">
-        
-          <div className="processoanddata">
              <FormGroup controlId="formProcess">
-               Process#1
                 <Col componentClass={ControlLabel} sm={2}>
-                 
+                  Process#1
                 </Col>
-                <Col sm={8}>
-                  <FormControl className="write"
+                <Col sm={4}>
+                  <FormControl 
                     type="text"
                     defaultValue=""
-                    placeholder="Process Name"
+                    placeholder="Name"
                   />
                 </Col>
-                 <Col sm={8}>
-                  <FormControl className="write" 
-                    type="text"
-                    defaultValue=""
-                    placeholder="Description"
-                  />
-                </Col>
-              </FormGroup>
-            </div>
-        
-       
-        
-        
-      
-        
-        
-        </div>
-         <div className="dataclasslista">
-             <div className="processoanddata">
-             <FormGroup controlId="formProcess">
-                    Data Class #1
+                
+             
                 <Col componentClass={ControlLabel} sm={2}>
-                 
+                  Data Class#1
                 </Col>
-                <Col sm={8}>
-                  <FormControl className="write"
+                <Col sm={4}>
+                  <FormControl 
                     type="text"
                     defaultValue=""
                     placeholder="Data Class Name"
                   />
                 </Col>
-                 <Col sm={8}>
-                  <FormControl className="write" 
+                <Col sm={4} >
+                  <FormControl 
                     type="text"
                     defaultValue=""
                     placeholder="Description"
                   />
                 </Col>
-                
-              
-            </FormGroup>
-         </div> 
-        </div>
-        
-       </div>    
                 <Col sm={2} md={3}>
                   <Button bsStyle='danger' bsSize='large'  block >
                     New
@@ -127,8 +96,7 @@ class NewProcess extends Component {
                   </Button>
                 </Col>
                 <FormControl.Feedback />
-             
-              
+              </FormGroup>
           </Col>
           
           <Col md={2} sm={3} className="center-text">

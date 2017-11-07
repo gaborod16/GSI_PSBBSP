@@ -16,9 +16,9 @@ class Content extends Component {
   render() {
     return (
         <Switch>
-          <Route path={'/'} exact component={Login}></Route>
+          <Route path={'/'} exact component={MainPage}></Route>
+          <Route path={'/login'} exact component={Login}></Route>
           <Route path={'/register'} exact component={Register}></Route>
-          <Route path={'/mainPage'} exact component={MainPage}></Route>
           <Route path={'/newProject'} exact component={NewProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>
