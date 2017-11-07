@@ -6,23 +6,23 @@ import './template.css';
 
 import Login from './loginForm';
 import Register from './register';
-import MainPage from './mainpage';
+import MainPage from './mainPage';
 import NewProject from './newProject';
-import ProjectPage from './projectpage';
-import NewProcess from './NewProcess';
-import ShowMatrix from './ShowMatrix';
+import ProjectPage from './projectPage';
+import NewProcess from './newProcess';
+import ShowMatrix from './showMatrix';
 
 class Content extends Component {
   render() {
     return (
         <Switch>
-          <Route path={'/'} exact component={Login}></Route>
+          <Route path={'/'} exact component={MainPage}></Route>
+          <Route path={'/login'} exact component={Login}></Route>
           <Route path={'/register'} exact component={Register}></Route>
-          <Route path={'/mainpage'} exact component={MainPage}></Route>
           <Route path={'/newProject'} exact component={NewProject}></Route>
-          <Route path={'/projectpage'} exact component={ProjectPage}></Route>
-          <Route path={'/NewProcess'} exact component={NewProcess}></Route>
-          <Route path={'/ShowMatrix'} exact component={ShowMatrix}></Route>
+          <Route path={'/projectPage'} exact component={ProjectPage}></Route>
+          <Route path={'/newProcess'} exact component={NewProcess}></Route>
+          <Route path={'/showMatrix'} exact component={ShowMatrix}></Route>
         </Switch>
     );
   }

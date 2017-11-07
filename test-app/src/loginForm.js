@@ -17,11 +17,12 @@ class Login extends Component {
   }
 
   redirectRegister() {
+    console.log(this.props)
     this.props.history.push('./register')
   }
     
   redirectmainpage() {     
-    this.props.history.push('./mainpage')
+    this.props.history.push('./')
   }
 
   render() {
