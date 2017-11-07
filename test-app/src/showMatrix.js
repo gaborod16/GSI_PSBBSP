@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Button, Well, FormControl, FormGroup, Image, ControlLabel, Col, Row} from 'react-bootstrap';
-import {BootstrapTable, TableHeaderColumn} from 'reactjs-bootstrap-table';
 
 import TemplateSimple from './template-no-sidebar';
 import Template from './template';
@@ -85,7 +84,7 @@ class ShowMatrix extends Component {
                   {/*linha de cada process*/}
                   <th>Process #1</th>
                   <td style={{backgroundColor: bgColor}} onClick={this.changeColor.bind(this)}>x</td>
-                  <td ></td>
+                  <td style={{backgroundColor: bgColor}} onClick={this.changeColor.bind(this)}></td>
                   <td ></td>
                </tr>
                <tr>
