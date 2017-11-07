@@ -3,6 +3,29 @@ import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col, Image} fro
 
 import Template from './template';
 
+const plus = 'assets/plus.png';
+const lookup = 'assets/lookup.png';
+
+class CircleGroup extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <Row className="circle-create-row">
+        <Col sm={4} md={2}>
+          <Image src={this.props.image} circle className="circle-create-button" onClick={this.props.func}/>
+        </Col>
+        <Col sm={6} className="circle-create-text">
+          <h5>{this.props.name}</h5>
+        </Col>
+      </Row>
+    )
+  }
+}
+
 class MainPage extends Component {
 
   constructor() {
@@ -28,14 +51,12 @@ class MainPage extends Component {
     return (
       
       <Template history={this.props.history}>
-        <Row> 
+        <Row>
           <Col md={3} sm={4} className="circle-create-col">
-            <Col sm={4} md={3}>
-              <Image src="assets/plus.png" circle className="circle-create-button" onClick={this.redirectNewProject}/>
-            </Col>
-            <Col sm={8} md={5} className="circle-create-text">
-              <h5>Create New Project</h5>
-            </Col>
+            <CircleGroup name="Create New Project" func={this.redirectNewProject} image={plus}/>
+            <CircleGroup name="Add New Members" func={this.redirectNewProject} image={plus}/>
+            <CircleGroup name="Organization Units" func={this.redirectNewProject} image={lookup}/>
+            <CircleGroup name="Support Systems" func={this.redirectNewProject} image={lookup}/>
           </Col>
 
           <Col lg={6} md={7} sm={8}>

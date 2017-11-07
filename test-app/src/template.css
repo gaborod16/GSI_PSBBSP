@@ -39,9 +39,12 @@
 	margin-top: 5em;
 }
 
+.circle-create-row {
+	margin-bottom: 1em;
+}
+
 .circle-create-text {
-	display: inline-block;
-    vertical-align: bottom;
+	
 }
 
 .tabela{

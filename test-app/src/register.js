@@ -33,6 +33,19 @@ class Register extends Component {
                 />
               </Col>
             </FormGroup>
+
+            <FormGroup controlId="formOrganization">
+              <Col componentClass={ControlLabel} sm={3}>
+                Organization
+              </Col>
+              <Col sm={9}>
+                <FormControl 
+                  type="text" 
+                  placeholder="Enter Organization's name" 
+                />
+              </Col>
+            </FormGroup>
+
             <FormGroup controlId="formPassword">
               <Col componentClass={ControlLabel} sm={3}>
                 Password
@@ -44,6 +57,7 @@ class Register extends Component {
                 />
               </Col>
             </FormGroup>
+
             <FormGroup controlId="formRePassword">
               <Col componentClass={ControlLabel} sm={3}>
                 Repeat Password
@@ -56,6 +70,7 @@ class Register extends Component {
               </Col>
               <FormControl.Feedback />
             </FormGroup>
+
             <FormGroup>
               <Col smOffset={3} sm={3}>
                 <Button type="submit" bsStyle='danger' bsSize='large'>
