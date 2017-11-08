@@ -6,6 +6,7 @@ CREATE TABLE "gsi_database"."information_schema"."account" (
                 "account_id" INTEGER NOT NULL DEFAULT nextval('"gsi_database"."information_schema"."account_account_id_seq"'),
                 "account_username" VARCHAR(255),
                 "account_password" VARCHAR(65),
+                "account_email" VARCHAR(255),
                 CONSTRAINT "account_id" PRIMARY KEY ("account_id")
 );
 COMMENT ON COLUMN "gsi_database"."information_schema"."account"."account_password" IS 'SHA-256 creates 65 character strings';
@@ -40,23 +41,11 @@ CREATE TABLE "gsi_database"."information_schema"."dataclass" (
 
 ALTER SEQUENCE "gsi_database"."information_schema"."dataclass_dataclass_id_seq" OWNED BY "gsi_database"."information_schema"."dataclass"."dataclass_id";
 
-CREATE SEQUENCE "gsi_database"."information_schema"."organization_organization_id_seq";
-
-CREATE TABLE "gsi_database"."information_schema"."organization" (
-                "organization_id" INTEGER NOT NULL DEFAULT nextval('"gsi_database"."information_schema"."organization_organization_id_seq"'),
-                "organization_name" VARCHAR(255),
-                CONSTRAINT "organization_id" PRIMARY KEY ("organization_id")
-);
-
-
-ALTER SEQUENCE "gsi_database"."information_schema"."organization_organization_id_seq" OWNED BY "gsi_database"."information_schema"."organization"."organization_id";
-
 CREATE SEQUENCE "gsi_database"."information_schema"."organization_unit_organization_unit_id_seq";
 
 CREATE TABLE "gsi_database"."information_schema"."organization_unit" (
                 "organization_unit_id" INTEGER NOT NULL DEFAULT nextval('"gsi_database"."information_schema"."organization_unit_organization_unit_id_seq"'),
                 "organization_unit_name" VARCHAR(255),
-                "organization_id" INTEGER NOT NULL,
                 CONSTRAINT "organization_unit_id" PRIMARY KEY ("organization_unit_id")
 );
 
@@ -90,7 +79,6 @@ CREATE SEQUENCE "gsi_database"."information_schema"."project_project_id_seq";
 CREATE TABLE "gsi_database"."information_schema"."project" (
                 "project_id" INTEGER NOT NULL DEFAULT nextval('"gsi_database"."information_schema"."project_project_id_seq"'),
                 "project_name" VARCHAR(255),
-                "organization_id" INTEGER NOT NULL,
                 "account_id_team_leader" INTEGER NOT NULL,
                 "account_id_secretary" INTEGER NOT NULL,
                 CONSTRAINT "project_id" PRIMARY KEY ("project_id")
@@ -161,7 +149,6 @@ CREATE SEQUENCE "gsi_database"."information_schema"."support_system_support_syst
 CREATE TABLE "gsi_database"."information_schema"."support_system" (
                 "support_system_id" INTEGER NOT NULL DEFAULT nextval('"gsi_database"."information_schema"."support_system_support_system_id_seq"'),
                 "support_system_name" VARCHAR(255),
-                "organization_id" INTEGER NOT NULL,
                 CONSTRAINT "support_system_id" PRIMARY KEY ("support_system_id")
 );
 
@@ -199,27 +186,6 @@ NOT DEFERRABLE;
 ALTER TABLE "gsi_database"."information_schema"."ss_dataclass" ADD CONSTRAINT "dataclass_ss_dataclass_fk"
 FOREIGN KEY ("dataclass_id")
 REFERENCES "gsi_database"."information_schema"."dataclass" ("dataclass_id")
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE "gsi_database"."information_schema"."organization_unit" ADD CONSTRAINT "organization_department_fk"
-FOREIGN KEY ("organization_id")
-REFERENCES "gsi_database"."information_schema"."organization" ("organization_id")
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE "gsi_database"."information_schema"."project" ADD CONSTRAINT "organization_project_fk"
-FOREIGN KEY ("organization_id")
-REFERENCES "gsi_database"."information_schema"."organization" ("organization_id")
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE "gsi_database"."information_schema"."support_system" ADD CONSTRAINT "organization_support_system_fk"
-FOREIGN KEY ("organization_id")
-REFERENCES "gsi_database"."information_schema"."organization" ("organization_id")
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
