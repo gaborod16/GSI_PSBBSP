@@ -16,12 +16,17 @@ class MainPage extends Component {
     }
     
     this.redirectNewProject = this.redirectNewProject.bind(this);
+    this.redirectRegister = this.redirectRegister.bind(this);
     this.redirectProjectPage = this.redirectProjectPage.bind(this);
     this.redirectOUsPage = this.redirectOUsPage.bind(this);
   }
     
   redirectNewProject() {
     this.props.history.push('./newProject')
+  }
+
+  redirectRegister() {
+    this.props.history.push('./register')
   }
     
   redirectProjectPage() {
@@ -43,7 +48,7 @@ class MainPage extends Component {
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
             <CircleGroup name="Create New Project" func={this.redirectNewProject} image={plus}/>
-            <CircleGroup name="Add New Members" func={this.redirectNewProject} image={plus}/>
+            <CircleGroup name="Add New Members" func={this.redirectRegister} image={plus}/>
             <CircleGroup name="Organization Units" func={this.redirectOUsPage} image={lookup}/>
             <CircleGroup name="Support Systems" func={this.redirectNewProject} image={lookup}/>
           </Col>
