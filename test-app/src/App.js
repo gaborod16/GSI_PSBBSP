@@ -32,7 +32,6 @@ class Content extends Component {
 
 class App extends Component {
   render() {
-
     return (
       <Grid fluid>
         <Row>

@@ -19,6 +19,13 @@
 	color: #dfc12a;
 }
 
+hr.darkGrey {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: #c1c1c1;
+    border-top: 1px solid;
+}
+
 #menu {
 	padding-top: 4em;
 	padding-bottom: 1em;
@@ -62,6 +69,11 @@
 
 .circle-create-text {
 	
+}
+
+.full-width {
+    display: grid;
+    width: 100%;
 }
 
 .tabela{

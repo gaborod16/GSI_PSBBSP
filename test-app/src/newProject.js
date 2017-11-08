@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {PageHeader, Form, Button, Well, FormControl, FormGroup, ControlLabel, Col, MenuItem, DropdownButton, ButtonToolbar} from 'react-bootstrap';
+import {PageHeader, Form, Button, Well, FormControl, FormGroup, ControlLabel, Col, MenuItem, DropdownButton, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
 
 import Template from './template'
 
@@ -16,7 +16,6 @@ class NewProject extends Component {
   redirectMainPage() {
     this.props.history.push('./')
   }
-   
 
   render() {
     return (
@@ -32,7 +31,7 @@ class NewProject extends Component {
                 <Col sm={9}>
                   <FormControl 
                     type="text" 
-                    placeholder="Enter Project Name" 
+                    placeholder="Enter Project's Name" 
                   />
                 </Col>
               </FormGroup>
@@ -40,34 +39,36 @@ class NewProject extends Component {
               <FormGroup controlId="teamLeaderUser">
                 <Col componentClass={ControlLabel} sm={3}>Team Leader</Col>
                 <Col sm={9}>
-                  <ButtonToolbar>
-                    <DropdownButton title="Select a team leader" id="dropdown-size-medium">
+                  <ButtonGroup vertical block>
+                    <DropdownButton title="Select a team leader" id="dropdown-size-medium" block>
                       <MenuItem eventKey="1">James Bond</MenuItem>
                       <MenuItem eventKey="2">Albert Einstein</MenuItem>
                       <MenuItem eventKey="3">Peter Pan</MenuItem>
                       <MenuItem eventKey="4">Mickey Mouse</MenuItem>
                     </DropdownButton>
-                  </ButtonToolbar>
+                  </ButtonGroup>
                 </Col>
               </FormGroup>
 
-              <FormGroup controlId="teamLeaderUser">
+              <FormGroup controlId="secretaryUser">
                 <Col componentClass={ControlLabel} sm={3}>Secretary</Col>
                 <Col sm={9}>
-                  <ButtonToolbar>
+                  <ButtonGroup vertical block>
                     <DropdownButton title="Select a secretary" id="dropdown-size-medium">
                       <MenuItem eventKey="1">James Bond</MenuItem>
                       <MenuItem eventKey="2">Albert Einstein</MenuItem>
                       <MenuItem eventKey="3">Peter Pan</MenuItem>
                       <MenuItem eventKey="4">Mickey Mouse</MenuItem>
                     </DropdownButton>
-                  </ButtonToolbar>
+                  </ButtonGroup>
                 </Col>
               </FormGroup>
 
+              <hr className="darkGrey"/>
+
               <FormGroup>
-                <Col smOffset={3} sm={3}>
-                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectMainPage}>Create</Button>
+                <Col smOffset={8} sm={4}>
+                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectMainPage} block>Create</Button>
                 </Col>
               </FormGroup>
             </Form>
