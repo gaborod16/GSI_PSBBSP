@@ -11,17 +11,11 @@ class Login extends Component {
       username: '',
       password: ''
     }
-
-    this.redirectRegister = this.redirectRegister.bind(this);
-    this.redirectmainpage = this.redirectmainpage.bind(this);
-  }
-
-  redirectRegister() {
-    console.log(this.props)
-    this.props.history.push('./register')
+     
+    this.redirectMainPage = this.redirectMainPage.bind(this);
   }
     
-  redirectmainpage() {     
+  redirectMainPage() {     
     this.props.history.push('./')
   }
 
@@ -60,15 +54,12 @@ class Login extends Component {
                 <FormControl.Feedback />
               </FormGroup>
 
+              <hr className="darkGrey"/>
+
               <FormGroup>
-                <Col smOffset={2} sm={4} md={3}>
-                  <Button type="submit" bsStyle='danger' bsSize='large' onClick={this.redirectmainpage} block>
+                <Col smOffset={8} sm={4}>
+                  <Button type="submit" bsStyle='danger' bsSize='large' onClick={this.redirectMainPage} block>
                     Login
-                  </Button>
-                </Col>
-                <Col sm={4} md={3}>
-                  <Button bsStyle='danger' bsSize='large' onClick={this.redirectRegister} block>
-                    Register
                   </Button>
                 </Col>
               </FormGroup>

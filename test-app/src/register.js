@@ -20,8 +20,20 @@ class Register extends Component {
         <Well bsSize='large'>
           <Form horizontal>
             <Col smOffset={3} sm={9}>
-              <PageHeader><small>Register form</small></PageHeader>
+              <PageHeader><small>Register a new member</small></PageHeader>
             </Col>
+            <FormGroup controlId="formUsername">
+              <Col componentClass={ControlLabel} sm={3}>
+                Username
+              </Col>
+              <Col sm={9}>
+                <FormControl 
+                  type="email" 
+                  placeholder="Enter Username" 
+                />
+              </Col>
+            </FormGroup>
+
             <FormGroup controlId="formEmail">
               <Col componentClass={ControlLabel} sm={3}>
                 E-mail
@@ -33,48 +45,14 @@ class Register extends Component {
                 />
               </Col>
             </FormGroup>
+            <FormControl.Feedback />
 
-            <FormGroup controlId="formOrganization">
-              <Col componentClass={ControlLabel} sm={3}>
-                Organization
-              </Col>
-              <Col sm={9}>
-                <FormControl 
-                  type="text" 
-                  placeholder="Enter Organization's name" 
-                />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formPassword">
-              <Col componentClass={ControlLabel} sm={3}>
-                Password
-              </Col>
-              <Col sm={9}>
-                <FormControl 
-                  type="password" 
-                  placeholder="Enter Password" 
-                />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formRePassword">
-              <Col componentClass={ControlLabel} sm={3}>
-                Repeat Password
-              </Col>
-              <Col sm={9}>
-                <FormControl 
-                  type="password" 
-                  placeholder="Re-type Password" 
-                />
-              </Col>
-              <FormControl.Feedback />
-            </FormGroup>
+            <hr className="darkGrey"/>
 
             <FormGroup>
-              <Col smOffset={3} sm={3}>
-                <Button type="submit" bsStyle='danger' bsSize='large'>
-                  Register
+              <Col smOffset={8} sm={4}>
+                <Button type="submit" bsStyle='danger' bsSize='large' block>
+                  Send invitation
                 </Button>
               </Col>
             </FormGroup>
