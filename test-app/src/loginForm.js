@@ -78,14 +78,5 @@ class Login extends Component {
     );
   }
 }
-/*
-function test(x){
-    x = document.getElementsByClassName("testing");
-    var string_teste = x.value;
-    //window.alert(string_teste)
-    console.log(string_teste);
-    //window.alert("sss");
-}
-*/
 
 export default Login;
