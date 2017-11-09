@@ -8,6 +8,7 @@ import Login from './loginForm';
 import Register from './register';
 import MainPage from './mainPage';
 import ListOrganizationUnits from './listOrganizationUnits'
+import ListSupportSystems from './listSupportSystems'
 import NewProject from './newProject';
 import ProjectPage from './projectPage';
 import NewProcess from './newProcess';
@@ -21,6 +22,7 @@ class Content extends Component {
           <Route path={'/login'} exact component={Login}></Route>
           <Route path={'/register'} exact component={Register}></Route>
           <Route path={'/listOrganizationUnits'} exact component={ListOrganizationUnits}></Route>
+          <Route path={'/listSupportSystems'} exact component={ListSupportSystems}></Route>
           <Route path={'/newProject'} exact component={NewProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>

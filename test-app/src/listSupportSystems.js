@@ -8,32 +8,32 @@ import ModalAdd from './modals'
 
 const plus = 'assets/plus.png';
 
-class ListOrganizationUnits extends Component {
+class ListSupportSystems extends Component {
 
   constructor() {
     super();
     this.state = {
       showModalAdd: false,
       showModalEdit: false,
-      tempOU: ''
+      tempSS: ''
     };
 
-    this.list = [{index: 1, name: 'CIO'}, {index: 2, name: 'CEO'}, {index: 3, name: 'HR'}];
+    this.list = [{index: 1, name: 'Web Server'}, {index: 2, name: 'Database'}, {index: 3, name: 'Cloud Server'}];
 
     this.closeModal = this.closeModal.bind(this);
     this.openModalAdd = this.openModalAdd.bind(this);
     this.openModalEdit = this.openModalEdit.bind(this);
 
-    this.onChangeOU = this.onChangeOU.bind(this);
-    this.addOU = this.addOU.bind(this);
-    this.editOU = this.editOU.bind(this);
-    this.deleteOU = this.deleteOU.bind(this);
+    this.onChangeSS = this.onChangeSS.bind(this);
+    this.addSS = this.addSS.bind(this);
+    this.editSS = this.editSS.bind(this);
+    this.deleteSS = this.deleteSS.bind(this);
 
     this.redirectMainPage = this.redirectMainPage.bind(this);
   }
   
   closeModal() {
-    this.setState({ showModal: false });
+    this.setState({ showModalAdd: false, showModalEdit: false });
   }
 
   openModalAdd() {
@@ -44,24 +44,24 @@ class ListOrganizationUnits extends Component {
     this.setState({ showModalEdit: true });
   }
 
-  onChangeOU(e) {
+  onChangeSS(e) {
     console.log(e.target.value);
-    this.setState({tempOU: e.target.value});
+    this.setState({tempSS: e.target.value});
   }
 
-  addOU(e) {
+  addSS(e) {
     e.preventDefault();
     this.setState({ showModalAdd: false });
-    console.log(this.state.tempOU);
+    console.log(this.state.tempSS);
   }
 
-  editOU(e) {
+  editSS(e) {
     e.preventDefault();
     this.setState({ showModalEdit: false });
-    console.log(this.state.tempOU);
+    console.log(this.state.tempSS);
   }
 
-  deleteOU(e) {
+  deleteSS(e) {
     console.log(e.target);
   }
     
@@ -73,38 +73,38 @@ class ListOrganizationUnits extends Component {
     return (
       <Template history={this.props.history}>
         <Row>
-          <h2 className="center-text"> Your Organization Units</h2>
+          <h2 className="center-text"> Your support systems</h2>
         </Row>
 
         <Row>
           <ModalAdd 
-            title="Add a New Organization Unit"
-            entity="Organization Unit"
+            title="Add a New Support System"
+            entity="Support System"
             showModal={this.state.showModalAdd} 
             cancelFunc={this.closeModal} 
-            onChangeFunc={this.onChangeOU}
-            submitFunc={this.addOU}
+            onChangeFunc={this.onChangeSS}
+            submitFunc={this.addSS}
           />
 
           <ModalAdd 
-            title="Edit your Organization Unit"
-            entity="Organization Unit"
+            title="Edit your Support System"
+            entity="Support System"
             showModal={this.state.showModalEdit} 
             cancelFunc={this.closeModal} 
-            onChangeFunc={this.onChangeOU}
-            submitFunc={this.editOU}
+            onChangeFunc={this.onChangeSS}
+            submitFunc={this.editSS}
           />
 
           <Col md={3} sm={4}>
-            <CircleGroup name="Add New Organization Unit" func={this.openModalAdd} image={plus}/>
+            <CircleGroup name="Add New Support System" func={this.openModalAdd} image={plus}/>
           </Col>
 
           <Col lg={6} md={7} sm={8}>
             <ListTable 
-              entityName="Organization Units" 
+              entityName="Support Systems" 
               data={this.list}
               editFunc={this.openModalEdit} 
-              deleteFunc={this.deleteOU}
+              deleteFunc={this.deleteSS}
             />
           </Col>
         </Row>
@@ -113,4 +113,4 @@ class ListOrganizationUnits extends Component {
   }
 }
 
-export default ListOrganizationUnits;
+export default ListSupportSystems;
