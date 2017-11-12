@@ -13,6 +13,7 @@ import NewProject from './newProject';
 import ProjectPage from './projectPage';
 import NewProcess from './newProcess';
 import ShowMatrix from './showMatrix';
+import NewDataClass from './newDataClass';
 
 class Content extends Component {
   render() {
@@ -27,6 +28,7 @@ class Content extends Component {
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>
           <Route path={'/showMatrix'} exact component={ShowMatrix}></Route>
+          <Route path={'/newDataClass'} exact component={NewDataClass}></Route>
         </Switch>
     );
   }
