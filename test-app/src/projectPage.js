@@ -4,6 +4,7 @@ import {Button, Well, FormControl, FormGroup, Image, ControlLabel, Col, Row, Lis
 import Template from './template';
 import CircleGroup from './circleGroup'
 import YouSeeing from './youSeeing'
+import EntityButton from './entityButton'
 import ModalAddMember from './modalAddMember'
 
 const plus = 'assets/plus.png';

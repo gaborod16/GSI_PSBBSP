@@ -3,14 +3,17 @@ import {PageHeader, Form, Button, Well, FormControl, FormGroup, ControlLabel, Co
 
 import Template from './template'
 
-class NewProject extends Component {
+class EditProject extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.projID = this.props.match.params.number; //USE THIS TO GET THE PROJECT AND FILL FIELDS
     this.state = {
       user: '',
-      selectedTeamLeader: 'Select a team leader',
-      selectedSecretary: 'Select a secretary'
+      projectName: "My first BSP project",
+      selectedTeamLeader: "Albert Einstein",
+      selectedSecretary: "Mickey Mouse"
     }
     this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];//this.props.listUsers;
     this.redirectMainPage = this.redirectMainPage.bind(this);
@@ -18,6 +21,7 @@ class NewProject extends Component {
     this.updateDropdownTeamLeader = this.updateDropdownTeamLeader.bind(this);
     this.getUsersForSecretary = this.getUsersForSecretary.bind(this);
     this.getUsersForTeamLeader = this.getUsersForTeamLeader.bind(this);
+
   }
 
   updateDropdownTeamLeader(index) {
@@ -42,7 +46,7 @@ class NewProject extends Component {
 
   redirectMainPage(e) {
     e.preventDefault();
-    this.props.history.push('./')
+    this.props.history.push('../')
   }
 
   render() {
@@ -52,7 +56,7 @@ class NewProject extends Component {
           <Well bsSize='large'>
             <Form horizontal>
               <Col smOffset={3} sm={9}>
-                <PageHeader><small>New BSP Project</small></PageHeader>
+                <PageHeader><small>Edit your BSP Project</small></PageHeader>
               </Col>
               <FormGroup controlId="projectName">
                 <Col componentClass={ControlLabel} sm={3}>Project Name</Col>
@@ -60,6 +64,7 @@ class NewProject extends Component {
                   <FormControl 
                     type="text" 
                     placeholder="Enter Project's Name" 
+                    defaultValue={this.state.projectName}
                   />
                 </Col>
               </FormGroup>
@@ -102,4 +107,4 @@ class NewProject extends Component {
 }
 
 
-export default NewProject;
+export default EditProject;

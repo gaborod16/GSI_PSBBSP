@@ -10,6 +10,7 @@ import MainPage from './mainPage';
 import ListOrganizationUnits from './listOrganizationUnits'
 import ListSupportSystems from './listSupportSystems'
 import NewProject from './newProject';
+import EditProject from './editProject';
 import ProjectPage from './projectPage';
 import NewProcess from './newProcess';
 import ShowMatrix from './showMatrix';
@@ -25,6 +26,7 @@ class Content extends Component {
           <Route path={'/listOrganizationUnits'} exact component={ListOrganizationUnits}></Route>
           <Route path={'/listSupportSystems'} exact component={ListSupportSystems}></Route>
           <Route path={'/newProject'} exact component={NewProject}></Route>
+          <Route path={'/project/:number'} exact component={EditProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>
           <Route path={'/showMatrix'} exact component={ShowMatrix}></Route>

@@ -18,16 +18,22 @@ class MainPage extends Component {
     }
     
     this.redirectNewProject = this.redirectNewProject.bind(this);
+    this.redirectEditProject = this.redirectEditProject.bind(this);
     this.redirectRegister = this.redirectRegister.bind(this);
     this.redirectProjectPage = this.redirectProjectPage.bind(this);
     this.redirectOUsPage = this.redirectOUsPage.bind(this);
     this.redirectSSsPage = this.redirectSSsPage.bind(this);
     this.editProject = this.editProject.bind(this);
     this.removeProject = this.removeProject.bind(this);
+    this.getProjects = this.getProjects.bind(this);
   }
     
   redirectNewProject() {
     this.props.history.push('./newProject')
+  }
+
+  redirectEditProject(index) {
+    this.props.history.push('./project/' + index)
   }
 
   redirectRegister() {
@@ -48,7 +54,9 @@ class MainPage extends Component {
 
   editProject(index) {
     return (e) => {
+      this.redirectEditProject(index);
       console.log(index);
+      
     };
   }
 
@@ -56,6 +64,19 @@ class MainPage extends Component {
     return (e) => {
       console.log(index);
     }
+  }
+
+  getProjects() {
+    let listProjects = [{name: 'My first BSP', index: 1}, {name: 'My second BSP', index: 2}, {name: 'BSP test', index: 3}];
+    return listProjects.map((proj) => 
+      <EntityButton
+        key={proj.index}
+        title={proj.name}
+        onClickFunc={this.redirectProjectPage}
+        onClickEditFunc={this.editProject(proj.index)}
+        onClickRemoveFunc={this.removeProject(proj.index)}
+      />
+    );
   }
 
   render() {
@@ -72,24 +93,7 @@ class MainPage extends Component {
           </Col>
 
           <Col lg={6} md={7} sm={8}>
-            <EntityButton
-              title="Project #1"
-              onClickFunc={this.redirectProjectPage}
-              onClickEditFunc={this.editProject(1)}
-              onClickRemoveFunc={this.removeProject(1)}
-            />
-            <EntityButton
-              title="Project #2"
-              onClickFunc={this.redirectProjectPage}
-              onClickEditFunc={this.editProject(2)}
-              onClickRemoveFunc={this.removeProject(2)}
-            />
-            <EntityButton
-              title="Project #3"
-              onClickFunc={this.redirectProjectPage}
-              onClickEditFunc={this.editProject(3)}
-              onClickRemoveFunc={this.removeProject(3)}
-            />
+            {this.getProjects()}
           </Col>
         </Row>
       </Template>
