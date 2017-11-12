@@ -70,6 +70,7 @@ CREATE TABLE "gsi_database"."information_schema"."process_dataclass" (
                 "dataclass_id" INTEGER NOT NULL,
                 "process_dataclass_type" VARCHAR(30),
                 "subsystem_id" INTEGER NOT NULL,
+                "project_id" INTEGER NOT NULL,
                 CONSTRAINT "process_dataclass_id" PRIMARY KEY ("process_id", "dataclass_id")
 );
 
@@ -98,6 +99,7 @@ CREATE TABLE "gsi_database"."information_schema"."project_user" (
 CREATE TABLE "gsi_database"."information_schema"."ss_dataclass" (
                 "support_system_id" INTEGER NOT NULL,
                 "dataclass_id" INTEGER NOT NULL,
+                "project_id" INTEGER NOT NULL,
                 CONSTRAINT "ss_dataclass_id" PRIMARY KEY ("support_system_id", "dataclass_id")
 );
 
@@ -106,6 +108,7 @@ CREATE TABLE "gsi_database"."information_schema"."ss_organization_unit" (
                 "support_system_id" INTEGER NOT NULL,
                 "organization_unit_id" INTEGER NOT NULL,
                 "ss_organization_unit_support_type" VARCHAR(30),
+                "project_id" INTEGER NOT NULL,
                 CONSTRAINT "ss_organization_unit_id" PRIMARY KEY ("support_system_id", "organization_unit_id")
 );
 
@@ -114,6 +117,7 @@ CREATE TABLE "gsi_database"."information_schema"."ss_process" (
                 "support_system_id" INTEGER NOT NULL,
                 "process_id" INTEGER NOT NULL,
                 "ss_process_support_type" VARCHAR(30),
+                "project_id" INTEGER NOT NULL,
                 CONSTRAINT "ss_process_id" PRIMARY KEY ("support_system_id", "process_id")
 );
 
@@ -225,7 +229,35 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE "gsi_database"."information_schema"."process_dataclass" ADD CONSTRAINT "project_process_dataclass_fk"
+FOREIGN KEY ("project_id")
+REFERENCES "gsi_database"."information_schema"."project" ("project_id")
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE "gsi_database"."information_schema"."project_user" ADD CONSTRAINT "project_project_user_fk"
+FOREIGN KEY ("project_id")
+REFERENCES "gsi_database"."information_schema"."project" ("project_id")
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE "gsi_database"."information_schema"."ss_dataclass" ADD CONSTRAINT "project_ss_dataclass_fk"
+FOREIGN KEY ("project_id")
+REFERENCES "gsi_database"."information_schema"."project" ("project_id")
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE "gsi_database"."information_schema"."ss_organization_unit" ADD CONSTRAINT "project_ss_organization_unit_fk"
+FOREIGN KEY ("project_id")
+REFERENCES "gsi_database"."information_schema"."project" ("project_id")
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE "gsi_database"."information_schema"."ss_process" ADD CONSTRAINT "project_ss_process_fk"
 FOREIGN KEY ("project_id")
 REFERENCES "gsi_database"."information_schema"."project" ("project_id")
 ON DELETE NO ACTION
