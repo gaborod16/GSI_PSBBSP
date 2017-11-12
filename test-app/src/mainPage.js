@@ -3,6 +3,8 @@ import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col, Image} fro
 
 import Template from './template';
 import CircleGroup from './circleGroup'
+import YouSeeing from './youSeeing'
+import EntityButton from './entityButton'
 
 const plus = 'assets/plus.png';
 const lookup = 'assets/lookup.png';
@@ -20,6 +22,8 @@ class MainPage extends Component {
     this.redirectProjectPage = this.redirectProjectPage.bind(this);
     this.redirectOUsPage = this.redirectOUsPage.bind(this);
     this.redirectSSsPage = this.redirectSSsPage.bind(this);
+    this.editProject = this.editProject.bind(this);
+    this.removeProject = this.removeProject.bind(this);
   }
     
   redirectNewProject() {
@@ -42,13 +46,23 @@ class MainPage extends Component {
     this.props.history.push('./listSupportSystems')
   }
 
+  editProject(index) {
+    return (e) => {
+      console.log(index);
+    };
+  }
+
+  removeProject(index) {
+    return (e) => {
+      console.log(index);
+    }
+  }
+
   render() {
     return (
       
       <Template history={this.props.history}>
-        <Row>
-          <h2 className="center-text"> Your BSP Projects</h2>
-        </Row>
+        <YouSeeing title="Your BSP Projects"/>
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
             <CircleGroup name="Create New Project" func={this.redirectNewProject} image={plus}/>
@@ -58,8 +72,24 @@ class MainPage extends Component {
           </Col>
 
           <Col lg={6} md={7} sm={8}>
-            <Button bsStyle='warning' onClick={this.redirectProjectPage} block><h4>Project #1</h4></Button>
-            <Button bsStyle='warning' onClick={this.redirectProjectPage} block><h4>Project #2</h4></Button>
+            <EntityButton
+              title="Project #1"
+              onClickFunc={this.redirectProjectPage}
+              onClickEditFunc={this.editProject(1)}
+              onClickRemoveFunc={this.removeProject(1)}
+            />
+            <EntityButton
+              title="Project #2"
+              onClickFunc={this.redirectProjectPage}
+              onClickEditFunc={this.editProject(2)}
+              onClickRemoveFunc={this.removeProject(2)}
+            />
+            <EntityButton
+              title="Project #3"
+              onClickFunc={this.redirectProjectPage}
+              onClickEditFunc={this.editProject(3)}
+              onClickRemoveFunc={this.removeProject(3)}
+            />
           </Col>
         </Row>
       </Template>

@@ -65,7 +65,7 @@ class ProjectPage extends Component {
           submitFunc={this.addNewMember}
         />
 
-        <YouSeeing projName={this.projName}/>
+        <YouSeeing title={"Project: " + this.projName}/>
         
         <Row>
           <Col md={3} sm={4} className="circle-create-col">

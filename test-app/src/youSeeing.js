@@ -11,8 +11,8 @@ class YouSeeing extends Component {
     return (
       <Row>
         <Col className="youSeeing">
-          <p className="seeing"> You're seeing...  </p>
-          <h2 className="projName"> Project: {this.props.projName}</h2>
+          <p className="youSeeing"> You're seeing...  </p>
+          <h2 className="youSeeing"> {this.props.title} </h2>
         </Col>
       </Row>
     )

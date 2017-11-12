@@ -3,12 +3,16 @@
 	background-color: #E3E3E3;
 }
 
-.bg-blue{
+.bg-blue {
     background-color: blue;
 }
 
-.bg-green{
+.bg-green {
     background-color: green;
+}
+
+.white {
+    color: white;
 }
 
 .red {
@@ -149,17 +153,17 @@ table#t01 th {
     margin-right: -20%;
 }
 
-.youSeeing {
+div.youSeeing {
     margin-bottom: 3em;
 }
 
-.seeing {
+p.youSeeing {
     font-size: 18px;
     font-weight: lighter;
     opacity: 0.8;
 }
 
-.projName {
+h2.youSeeing {
     font-weight: bold;
     margin-top: -0.3em;
 }
