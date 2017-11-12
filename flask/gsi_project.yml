@@ -1,0 +1,1436 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "PSBBSP"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /login:
+    get:
+      summary: User authentication
+      operationId: login
+      parameters:
+      - $ref: "#/parameters/email"
+      - $ref: "#/parameters/password"
+      responses:
+        200:
+          description: User logged in and received the token
+          schema:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                format: int64
+              token:
+                type: string
+        401:
+          description: Unauthorized
+  /logout:
+    get:
+      summary: User logs out
+      operationId: logout
+      parameters:
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: User logged out
+        401:
+          description: Unauthorized
+  /account:
+    get:
+      summary: List accounts
+      operationId: list_accounts
+      parameters:
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of accounts
+          schema:
+            $ref: "#/definitions/Accounts"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new account
+      operationId: create_account
+      parameters:
+      - $ref: "#/parameters/username"
+      - $ref: "#/parameters/email"
+      - $ref: "#/parameters/password"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Account created
+        400:
+          description: Bad request
+        403:
+          description: Duplicate entry forbidden
+        500:
+          description: Internal server error
+  /account/{account_id}:
+    get:
+      summary: Get account
+      operationId: get_account
+      parameters:
+      - $ref: "#/parameters/account_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Account retrieved
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Account does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update account
+      operationId: update_account
+      parameters:
+      - $ref: "#/parameters/account_id"
+      - $ref: "#/parameters/account_username"
+      - $ref: "#/parameters/account_email"
+      - $ref: "#/parameters/account_password"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Account updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Account does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete account
+      operationId: delete_account
+      parameters:
+      - $ref: "#/parameters/account_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Account deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: User does not exist
+        500:
+          description: Internal server error
+  /projects:
+    get:
+      summary: List projects
+      operationId: list_projects
+      parameters:
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of projects
+          schema:
+            $ref: "#/definitions/Projects"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new project
+      operationId: create_projects
+      parameters:
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Project created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /projects/{project_id}:
+    get:
+      summary: Get project
+      operationId: get_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Project retrieved
+          schema:
+            $ref: "#/definitions/Project"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Project does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update project
+      operationId: update_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/project_name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Project updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Project does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete project
+      operationId: delete_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Project deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Project does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/users:
+    get:
+      summary: List users in project
+      operationId: list_users_in_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of projects
+          schema:
+            $ref: "#/definitions/Accounts"
+        401:
+          description: Unauthorized
+  /projects/{project_id}/users/{account_id}:
+    put:
+      summary: Add user to project
+      operationId: add_user_to_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: User added to project
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Project does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Remove user from project
+      operationId: remove_user_from_project
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: User removed from project
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Project does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/processes:
+    get:
+      summary: List processes
+      operationId: list_processes
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of processes
+          schema:
+            $ref: "#/definitions/Processes"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new process
+      operationId: create_process
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Process created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /projects/{project_id}/processes/{process_id}:
+    get:
+      summary: Get process
+      operationId: get_process
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/process_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Process retrieved
+          schema:
+            $ref: "#/definitions/Process"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Process does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update process
+      operationId: update_process
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/process_id"
+      - $ref: "#/parameters/dataclass_name"
+      - $ref: "#/parameters/dataclass_description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Process updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Process does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete process
+      operationId: delete_process
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/process_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Process deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Process does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/dataclasses:
+    get:
+      summary: List dataclasses
+      operationId: list_dataclasses
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of dataclasses
+          schema:
+            $ref: "#/definitions/Dataclasses"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new dataclass
+      operationId: create_dataclass
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Dataclass created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /projects/{project_id}/dataclasses/{dataclass_id}:
+    get:
+      summary: Get dataclass
+      operationId: get_dataclass
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/dataclass_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Dataclass retrieved
+          schema:
+            $ref: "#/definitions/Dataclass"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Dataclass does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update dataclass
+      operationId: update_dataclass
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/dataclass_id"
+      - $ref: "#/parameters/dataclass_name"
+      - $ref: "#/parameters/dataclass_description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Dataclass updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Dataclass does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete dataclass
+      operationId: delete_dataclass
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/dataclass_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Dataclass deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Dataclass does not exist
+        500:
+          description: Internal server error
+  /supportsystems:
+    get:
+      summary: List support systems
+      operationId: list_support_systems
+      parameters:
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of support systems
+          schema:
+            $ref: "#/definitions/SupportSystems"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new support system
+      operationId: create_support_system
+      parameters:
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Support system created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /supportsystems/{support_system_id}:
+    get:
+      summary: Get support system
+      operationId: get_support_system
+      parameters:
+      - $ref: "#/parameters/support_system_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Support system retrieved
+          schema:
+            $ref: "#/definitions/SupportSystem"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Support system does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update support system
+      operationId: update_support_system
+      parameters:
+      - $ref: "#/parameters/support_system_id"
+      - $ref: "#/parameters/support_system_name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Support system updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Support system does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete support system
+      operationId: delete_support_system
+      parameters:
+      - $ref: "#/parameters/support_system_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Support system deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Support system does not exist
+        500:
+          description: Internal server error
+  /organizationunits:
+    get:
+      summary: List organization units
+      operationId: list_organization_units
+      parameters:
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of organization units
+          schema:
+            $ref: "#/definitions/SupportSystems"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new organization unit
+      operationId: create_organization_unit
+      parameters:
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Organization unit created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /organizationunits/{organization_unit_id}:
+    get:
+      summary: Get organization unit
+      operationId: get_organization_unit
+      parameters:
+      - $ref: "#/parameters/organization_unit_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Organization unit retrieved
+          schema:
+            $ref: "#/definitions/SupportSystem"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Organization unit does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update organization unit
+      operationId: update_organization_unit
+      parameters:
+      - $ref: "#/parameters/organization_unit_id"
+      - $ref: "#/parameters/support_system_name"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Organization unit updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Organization unit does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete organization unit
+      operationId: delete_organization_unit
+      parameters:
+      - $ref: "#/parameters/organization_unit_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Support system deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Support system does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/subsytems:
+    get:
+      summary: List subsystems
+      operationId: list_subsystems
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: List of subsystems
+          schema:
+            $ref: "#/definitions/Subsystems"
+        401:
+          description: Unauthorized
+    post:
+      summary: Create new subsystem
+      operationId: create_subsystem
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/name"
+      - $ref: "#/parameters/description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Subsystem created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /projects/{project_id}/subsystems/{subsystem_id}:
+    get:
+      summary: Get subsystem
+      operationId: get_subsystem
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/subsystem_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Subsystem retrieved
+          schema:
+            $ref: "#/definitions/Subsystem"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Subsystem does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update subsystem
+      operationId: update_subsystem
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/subsystem_id"
+      - $ref: "#/parameters/subsystem_name"
+      - $ref: "#/parameters/subsystem_description"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Subsystem updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Subsystem does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete subsystem
+      operationId: delete_subsystem
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/subsystem_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Subsystem deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Subsystem does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/matrices/processdataclass:
+    post:
+      summary: Create new process X dataclass matrix
+      operationId: create_process_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/process_dataclass_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Matrix created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    get:
+      summary: Get process X dataclass matrix
+      operationId: get_process_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix retrieved
+          schema:
+            $ref: "#/definitions/ProcessDataclassMatrix"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update process X dataclass matrix
+      operationId: update_process_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/process_dataclass_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete process X dataclass matrix
+      operationId: delete_process_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Matrix deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/matrices/supportsystemprocess:
+    post:
+      summary: Create new support system X process matrix
+      operationId: create_support_system_process_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_process_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Matrix created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    get:
+      summary: Get support system X process matrix
+      operationId: get_support_system_process_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix retrieved
+          schema:
+            $ref: "#/definitions/SupportSystemProcessMatrix"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update support system X process matrix
+      operationId: update_support_system_process_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_process_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete support system X process matrix
+      operationId: delete_support_system_process_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Matrix deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/matrices/supportsystemdataclass:
+    post:
+      summary: Create new support system X dataclass matrix
+      operationId: create_support_system_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_dataclass_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Matrix created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    get:
+      summary: Get support system X dataclass matrix
+      operationId: get_support_system_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix retrieved
+          schema:
+            $ref: "#/definitions/SupportSystemDataclassMatrix"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update support system X dataclass matrix
+      operationId: update_support_system_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_dataclass_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete support system X dataclass matrix
+      operationId: delete_support_system_dataclass_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Matrix deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+  /projects/{project_id}/matrices/supportsystemorganizationunit:
+    post:
+      summary: Create new support system X organization unit matrix
+      operationId: create_support_system_organization_unit_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_organization_unit_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        201:
+          description: Matrix created
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    get:
+      summary: Get support system X organization unit matrix
+      operationId: get_support_system_organization_unit_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix retrieved
+          schema:
+            $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    put:
+      summary: Update support system X organization unit matrix
+      operationId: update_support_system_organization_unit_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/support_system_organization_unit_matrix"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        200:
+          description: Matrix updated
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+    delete:
+      summary: Delete support system X organization unit matrix
+      operationId: delete_support_system_organization_unit_matrix
+      parameters:
+      - $ref: "#/parameters/project_id"
+      - $ref: "#/parameters/account_id_session"
+      - $ref: "#/parameters/token"
+      responses:
+        204:
+          description: Matrix deleted
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        404:
+          description: Matrix does not exist
+        500:
+          description: Internal server error
+definitions:
+  Accounts:
+    type: array
+    description: Collection of accounts
+    items:
+      $ref: "#/definitions/Account"
+  Account:
+    type: object
+    description: An account object
+    properties:
+      account_id:
+        type: integer
+        format: int64
+        description: Account identifier
+        readOnly: true
+      account_username:
+        type: string
+        description: Account username
+      account_email:
+        type: string
+        description: Account email
+      account_password:
+        type: string
+        format: password
+        description: Account password
+  Projects:
+    type: array
+    description: Collection of projects
+    items:
+      $ref: "#/definitions/Project"
+  Project:
+    type: object
+    description: A project object
+    properties:
+      project_id:
+        type: integer
+        format: int64
+        description: Project identifier
+        readOnly: true
+      project_name:
+        type: string
+        description: Project Name
+  Processes:
+    type: array
+    description: Collection of processes
+    items:
+      $ref: "#/definitions/Process"
+  Process:
+    type: object
+    description: A process object
+    properties:
+      process_id:
+        type: integer
+        format: int64
+        description: Process identifier
+        readOnly: true
+      process_name:
+        type: string
+        description: Process name
+      process_description:
+        type: string
+        description: Process description
+  Dataclasses:
+    type: array
+    description: Collection of dataclasses
+    items:
+      $ref: "#/definitions/Dataclass"
+  Dataclass:
+    type: object
+    description: A dataclass object
+    properties:
+      dataclass_id:
+        type: integer
+        format: int64
+        description: Dataclass identifier
+        readOnly: true
+      dataclass_name:
+        type: string
+        description: Dataclass name
+      dataclassDescription:
+        type: string
+        description: Dataclass description
+  SupportSystems:
+    type: array
+    description: Collection of support systems
+    items:
+      $ref: "#/definitions/SupportSystem"
+  SupportSystem:
+    type: object
+    description: A support system object
+    properties:
+      support_system_id:
+        type: integer
+        format: int64
+        description: Support system identifier
+        readOnly: true
+      support_system_name:
+        type: string
+        description: Support system name
+  Subsystems:
+    type: array
+    description: Collection of subsystems
+    items:
+      $ref: "#/definitions/Subsystem"
+  Subsystem:
+    type: object
+    description: A subsystem object
+    properties:
+      subsystem_id:
+        type: integer
+        format: int64
+        description: Subsystem identifier
+        readOnly: true
+      subsystem_name:
+        type: string
+        description: Subsystem name
+      subsystem_description:
+        type: string
+        description: Subsystem description
+      subsystem_score_potential_benefits:
+        type: integer
+        format: int32
+        description: Subsystem score for its potential benefits
+      subsystem_score_impact:
+        type: integer
+        format: int32
+        description: Subsystem score for its impact
+      subsystem_score_prob_success:
+        type: integer
+        format: int32
+        description: Subsystem score for its probability of success
+      subsystem_score_demand:
+        type: integer
+        format: int32
+        description: Subsystem score for its demand
+      subsystem_score_cost:
+        type: integer
+        format: int32
+        description: Subsystem score for its cost
+      subsystem_score_dev_time:
+        type: integer
+        format: int32
+        description: Subsystem score for its development time
+      subsystem_score_total:
+        type: integer
+        format: int32
+        description: Subsystem total score
+  ProcessDataclassMatrix:
+    type: array
+    description: Collection of processes X dataclasses
+    items:
+      $ref: "#/definitions/ProcessDataclass"
+  ProcessDataclass:
+    type: object
+    description: A process X dataclass object
+    properties:
+      process_id:
+        type: integer
+        format: int64
+        description: Process identifier
+      dataclass_id:
+        type: integer
+        format: int64
+        description: Dataclass identifier
+      process_dataclass_type:
+        type: string
+        description: Process X dataclass type
+      subsystem_id:
+        type: integer
+        format: int64
+        description: Subsystem identifier
+  SupportSystemProcessMatrix:
+    type: array
+    description: Collection of support systems X processes
+    items:
+      $ref: "#/definitions/SupportSystemProcess"
+  SupportSystemProcess:
+    type: object
+    description: A support system X process object
+    properties:
+      support_system_id:
+        type: integer
+        format: int64
+        description: Support system identifier
+      process_id:
+        type: integer
+        format: int64
+        description: Process identifier
+      support_system_process_type:
+        type: string
+        description: Support system X process type
+  SupportSystemDataclassMatrix:
+    type: array
+    description: Collection of support systems X dataclasses
+    items:
+      $ref: "#/definitions/SupportSystemDataclass"
+  SupportSystemDataclass:
+    type: object
+    description: A support system X dataclass object
+    properties:
+      support_system_id:
+        type: integer
+        format: int64
+        description: Support system identifier
+      dataclass_id:
+        type: integer
+        format: int64
+        description: Dataclass identifier
+  SupportSystemOrganizationUnitMatrix:
+    type: array
+    description: Collection of support systems X organization units
+    items:
+      $ref: "#/definitions/SupportSystemOrganizationUnit"
+  SupportSystemOrganizationUnit:
+    type: object
+    description: A support system X organization unit object
+    properties:
+      support_system_id:
+        type: integer
+        format: int64
+        description: Support system identifier
+      organization_unit_id:
+        type: integer
+        format: int64
+        description: Organization unit identifier
+      support_system_organization_unit_type:
+        type: string
+        description: Process X dataclass type
+parameters:
+  username:
+    name: username
+    description: Account username
+    in: query
+    type: string
+    minLength: 1
+    required: true
+  password:
+    name: password
+    description: Account password
+    in: query
+    type: string
+    format: password
+    minLength: 1
+    required: true
+  email:
+    name: email
+    description: Account email
+    in: query
+    type: string
+    format: email
+    required: true
+  account_id_session:
+    name: account_id_session
+    description: Account id of the session
+    in: query
+    type: integer
+    format: int64
+    required: true
+  token:
+    name: token
+    description: Session token
+    in: query
+    type: string
+    required: true
+  name:
+    name: name
+    description: Name
+    in: query
+    type: string
+    minLength: 1
+    required: true
+  description:
+    name: description
+    description: Description
+    in: query
+    type: string
+    minLength: 1
+    required: true
+  project_id:
+    name: project_id
+    description: Project Id
+    in: path
+    type: integer
+    format: int64
+    required: true
+  account_id:
+    name: account_id
+    in: path
+    description: Account identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  process_id:
+    name: process_id
+    in: path
+    description: Process identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  dataclass_id:
+    name: dataclass_id
+    in: path
+    description: Dataclass identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  support_system_id:
+    name: support_system_id
+    in: path
+    description: Support system identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  organization_unit_id:
+    name: organization_unit_id
+    in: path
+    description: Organization unit identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  subsystem_id:
+    name: subsystem_id
+    in: path
+    description: Subsystem identifier located in the url path
+    type: integer
+    format: int64
+    required: true
+  matrix_type:
+    name: matrix_type
+    in: path
+    description: Matrix type located in the url path
+    type: string
+    minLength: 1
+    required: true
+  account_username:
+    name: account_username
+    description: Account username
+    in: query
+    type: string
+  account_email:
+    name: email
+    description: Account email
+    in: query
+    type: string
+    format: email
+  account_password:
+    name: account_password
+    description: Account password
+    in: query
+    type: string
+    format: password
+  project_name:
+    name: project_name
+    description: Project name
+    in: query
+    type: string
+  process_name:
+    name: process_name
+    description: Process name
+    in: query
+    type: string
+  process_description:
+    name: process_description
+    description: Process description
+    in: query
+    type: string
+  dataclass_name:
+    name: dataclass_name
+    description: Dataclass name
+    in: query
+    type: string
+  dataclass_description:
+    name: dataclass_description
+    description: Dataclass description
+    in: query
+    type: string
+  support_system_name:
+    name: support_system_name
+    description: Support system name
+    in: query
+    type: string
+  subsystem_name:
+    name: subsystem_name
+    description: Subsystem name
+    in: query
+    type: string
+  subsystem_description:
+    name: subsystem_description
+    description: Subsystem description
+    in: query
+    type: string
+  process_dataclass_matrix:
+    name: process_dataclass_matrix
+    in: body
+    description: Process X dataclass values
+    required: true
+    schema:
+      $ref: "#/definitions/ProcessDataclassMatrix"
+  support_system_process_matrix:
+    name: support_system_process_matrix
+    in: body
+    description: Support system X process values
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemProcessMatrix"
+  support_system_dataclass_matrix:
+    name: support_system_dataclass_matrix
+    in: body
+    description: Support system X dataclass values
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemDataclassMatrix"
+  support_system_organization_unit_matrix:
+    name: support_system_organization_unit_matrix
+    in: body
+    description: Support system X organization unit values
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
