@@ -21,6 +21,7 @@ class ProjectPage extends Component {
     this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];
     this.projName = "My BSP Project";
     this.redirectNewProcess = this.redirectNewProcess.bind(this);
+    this.redirectNewDataClass = this.redirectNewDataClass.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.onSelectMember = this.onSelectMember.bind(this);
@@ -49,6 +50,10 @@ class ProjectPage extends Component {
   redirectNewProcess() {     
     this.props.history.push('./newProcess')
   }
+
+   redirectNewDataClass() {     
+    this.props.history.push('./newDataClass')
+  }
   
   render() {
     return (
@@ -70,7 +75,8 @@ class ProjectPage extends Component {
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
             <CircleGroup name="Add Member" func={this.openModal} image={plus}/>
-            <CircleGroup name="Create New Process" func={this.redirectNewProject} image={plus}/>
+            <CircleGroup name="Create New Process" func={this.redirectNewProcess} image={plus}/>
+            <CircleGroup name="Create New Data Class" func={this.redirectNewDataClass} image={plus}/>
           </Col>
 
           <Col md={6} sm={4} className="center-text">
