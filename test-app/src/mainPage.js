@@ -52,7 +52,7 @@ class MainPage extends Component {
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
             <CircleGroup name="Create New Project" func={this.redirectNewProject} image={plus}/>
-            <CircleGroup name="Add New Members" func={this.redirectRegister} image={plus}/>
+            <CircleGroup name="Add New User" func={this.redirectRegister} image={plus}/>
             <CircleGroup name="Organization Units" func={this.redirectOUsPage} image={lookup}/>
             <CircleGroup name="Support Systems" func={this.redirectSSsPage} image={lookup}/>
           </Col>

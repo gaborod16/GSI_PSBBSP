@@ -148,3 +148,18 @@ table#t01 th {
     float: right;
     margin-right: -20%;
 }
+
+.youSeeing {
+    margin-bottom: 3em;
+}
+
+.seeing {
+    font-size: 18px;
+    font-weight: lighter;
+    opacity: 0.8;
+}
+
+.projName {
+    font-weight: bold;
+    margin-top: -0.3em;
+}

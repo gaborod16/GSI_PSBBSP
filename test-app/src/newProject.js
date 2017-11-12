@@ -8,11 +8,38 @@ class NewProject extends Component {
   constructor() {
     super();
     this.state = {
-      user: ''
+      user: '',
+      selectedTeamLeader: 'Select a team leader',
+      selectedSecretary: 'Select a secretary'
     }
+    this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];//this.props.listUsers;
     this.redirectMainPage = this.redirectMainPage.bind(this);
+    this.updateDropdownSecreatary = this.updateDropdownSecreatary.bind(this);
+    this.updateDropdownTeamLeader = this.updateDropdownTeamLeader.bind(this);
+    this.getUsersForSecretary = this.getUsersForSecretary.bind(this);
+    this.getUsersForTeamLeader = this.getUsersForTeamLeader.bind(this);
   }
-    
+
+  updateDropdownTeamLeader(index) {
+    this.setState({selectedTeamLeader: this.listUsers[index]});
+  }
+   
+  updateDropdownSecreatary(index) {
+    this.setState({selectedSecretary: this.listUsers[index]});
+  }
+
+  getUsersForSecretary() {
+    return this.listUsers.map((user, index) => 
+      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownSecreatary}>{user}</MenuItem>
+    );
+  }
+
+  getUsersForTeamLeader() {
+    return this.listUsers.map((user, index) => 
+      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownTeamLeader}>{user}</MenuItem>
+    );
+  }
+
   redirectMainPage() {
     this.props.history.push('./')
   }
@@ -40,11 +67,8 @@ class NewProject extends Component {
                 <Col componentClass={ControlLabel} sm={3}>Team Leader</Col>
                 <Col sm={9}>
                   <ButtonGroup vertical block>
-                    <DropdownButton title="Select a team leader" id="dropdown-size-medium" block>
-                      <MenuItem eventKey="1">James Bond</MenuItem>
-                      <MenuItem eventKey="2">Albert Einstein</MenuItem>
-                      <MenuItem eventKey="3">Peter Pan</MenuItem>
-                      <MenuItem eventKey="4">Mickey Mouse</MenuItem>
+                    <DropdownButton title={this.state.selectedTeamLeader} id="dropdown-size-medium" block>
+                      {this.getUsersForTeamLeader()}
                     </DropdownButton>
                   </ButtonGroup>
                 </Col>
@@ -54,11 +78,8 @@ class NewProject extends Component {
                 <Col componentClass={ControlLabel} sm={3}>Secretary</Col>
                 <Col sm={9}>
                   <ButtonGroup vertical block>
-                    <DropdownButton title="Select a secretary" id="dropdown-size-medium">
-                      <MenuItem eventKey="1">James Bond</MenuItem>
-                      <MenuItem eventKey="2">Albert Einstein</MenuItem>
-                      <MenuItem eventKey="3">Peter Pan</MenuItem>
-                      <MenuItem eventKey="4">Mickey Mouse</MenuItem>
+                    <DropdownButton title={this.state.selectedSecretary} id="dropdown-size-medium">
+                      {this.getUsersForSecretary()}
                     </DropdownButton>
                   </ButtonGroup>
                 </Col>
