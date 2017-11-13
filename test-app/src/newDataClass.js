@@ -96,10 +96,7 @@ class NewDataClass extends Component {
             <h2 style={proj_name}> Project #x  </h2>
           </Col>
 
-          <Col mdOffset={7} smOffset={5} md={2} sm={3} className="center-text">
-            <p> Add Member </p>
-            <hr/>
-          </Col>
+          
         </Row> 
         <Row> 
           <Col md={3} sm={4}>
@@ -138,21 +135,19 @@ class NewDataClass extends Component {
             </Table>
           </Col>
         </Row>
-               
-                 <Col md={13} sm={14}>
-            <CircleGroup name="Add New DataClass" func={this.openModal} image={plus}/>
-          
-                  <Button bsStyle='danger' bsSize='large'  block onClick={this.redirectProjectPage}>
+               <Col md={5} sm={12}>
+                 <CircleGroup name="Add New Process" func={this.openModal} image={plus}/>
+               </Col>
+               <Col md={10} sm={12}>
+                 <Button bsStyle='danger' bsSize='large'  block onClick={this.redirectProjectPage}>
                     Return
-                  </Button>
-                </Col>
-                <FormControl.Feedback />
-              </FormGroup>
-          </Col>
+                 </Button>
+              </Col>
+            <FormControl.Feedback />
+           </FormGroup>
+        </Col>
           
-          <Col md={2} sm={3} className="center-text">
-            <p>List of members</p>
-          </Col>
+          
         </Row>
         
         
