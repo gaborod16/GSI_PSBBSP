@@ -1,4 +1,5 @@
 import connexion
+import uuid
 from swagger_server.models.account import Account
 from swagger_server.models.accounts import Accounts
 from swagger_server.models.dataclass import Dataclass
@@ -20,6 +21,10 @@ from datetime import date, datetime
 from typing import List, Dict
 from six import iteritems
 from ..util import deserialize_date, deserialize_datetime
+from swagger_server.database.database import db_session
+
+
+tokens = {}
 
 
 def add_user_to_project(project_id, account_id, account_id_session, token):
@@ -743,7 +748,22 @@ def login(email, password):
 
     :rtype: InlineResponse200
     """
-    return 'do some magic!'
+
+    print("login method was called...")
+
+    print("email --> " + email)
+    print("password --> " + password)
+
+    account = db_session.query(Account).filter(Account._account_email == email).first()
+
+    if account is None:
+        return None, 401
+
+    tokens[account.account_id] = uuid.uuid4().hex
+
+    object = InlineResponse200(account_id=account.account_id, token=tokens[account.account_id])
+
+    return object, 200
 
 
 def logout(account_id_session, token):
