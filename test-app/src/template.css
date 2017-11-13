@@ -80,36 +80,11 @@ hr.darkGrey {
     width: 100%;
 }
 
-.tabela{
-   border: "1px solid black";
-   border-collapse: "collapse";      
-}
-
-table {
-    width:100%;
-}
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 5px;
+.tableHeader {
+    background-color: #E3E3E3;
+    color: black;
+    font-weight: bold;
     text-align: center;
-}
-
-table#t01 tr:nth-child(even) {
-    background-color: #eee;
-}
-
-table#t01 tr:nth-child(odd) {
-   background-color:#fff;
-}
-
-table#t01 th {
-    background-color: black;
-    color: white;
 }
 
 .processesdatacontainer{

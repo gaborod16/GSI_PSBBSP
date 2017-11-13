@@ -13,8 +13,9 @@ import NewProject from './newProject';
 import EditProject from './editProject';
 import ProjectPage from './projectPage';
 import NewProcess from './newProcess';
-import ShowMatrix from './showMatrix';
+import ShowMatrices from './showMatrices';
 import NewDataClass from './newDataClass';
+import Subsystem from './subsystemPage';
 
 class Content extends Component {
   render() {
@@ -29,8 +30,9 @@ class Content extends Component {
           <Route path={'/project/:number'} exact component={EditProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>
-          <Route path={'/showMatrix'} exact component={ShowMatrix}></Route>
+          <Route path={'/showMatrices'} exact component={ShowMatrices}></Route>
           <Route path={'/newDataClass'} exact component={NewDataClass}></Route>
+          <Route path={'/subsystemPage'} exact component={Subsystem}></Route>
         </Switch>
     );
   }

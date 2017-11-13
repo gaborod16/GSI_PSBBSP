@@ -5,11 +5,7 @@ import TemplateSimple from './template-no-sidebar';
 import Template from './template';
 import classNames from 'classnames';
 
-
-
-
-
-class ShowMatrix extends Component {
+class ShowMatrices extends Component {
 
   constructor(props) {
     super(props);
@@ -23,9 +19,9 @@ class ShowMatrix extends Component {
       }
   }
 
-    changeColor(){
-            this.setState({color_black: !this.state.color_black})
-    }
+  changeColor(){
+    this.setState({color_black: !this.state.color_black})
+  }
 
     
      
@@ -53,7 +49,7 @@ class ShowMatrix extends Component {
        
     return (
     <div>    
-      <Template>
+      <Template history={this.props.history}>
         <Row>   
           <Col md={3} sm={4}>
             <p style={seeing}> You're seeing  </p>
@@ -119,14 +115,5 @@ class ShowMatrix extends Component {
     );
   }
 }
-/*
-function test(x){
-    x = document.getElementsByClassName("testing");
-    var string_teste = x.value;
-    //window.alert(string_teste)
-    console.log(string_teste);
-    //window.alert("sss");
-}
-*/
 
-export default ShowMatrix;
+export default ShowMatrices;

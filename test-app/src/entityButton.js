@@ -5,6 +5,21 @@ class EntityButton extends Component {
   constructor() {
     super();
     this.state = {};
+    this.showEditButton = this.showEditButton.bind(this);
+  }
+
+  showEditButton() {
+
+    if (this.props.onClickEditFunc && typeof this.props.onClickEditFunc == "function") {
+      return (
+        <Button bsStyle="primary" bsSize="large" onClick={this.props.onClickEditFunc}>
+          <Glyphicon glyph="pencil" className="white"/>
+        </Button>
+      );
+    } 
+    else {
+      return;
+    }
   }
 
   render() {
@@ -17,9 +32,7 @@ class EntityButton extends Component {
         </Col>
         <Col sm={4} md={4}>
           <ButtonGroup>
-            <Button bsStyle="primary" bsSize="large" onClick={this.props.onClickEditFunc}>
-              <Glyphicon glyph="pencil" className="white"/>
-            </Button>
+            {this.showEditButton()}
             <Button bsStyle='danger' bsSize="large" onClick={this.props.onClickRemoveFunc}>
               <Glyphicon glyph="remove" className="white"/>
             </Button>

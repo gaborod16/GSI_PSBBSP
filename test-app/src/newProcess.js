@@ -91,7 +91,7 @@ class NewProcess extends Component {
       }
          
     return (
-      <Template>
+      <Template history={this.props.history}>
         <Row>   
           <Col md={3} sm={4}>
             <p style={seeing}> You're seeing  </p>
