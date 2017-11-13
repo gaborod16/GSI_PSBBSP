@@ -1,0 +1,2446 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "PSBBSP"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /login:
+    get:
+      summary: "User authentication"
+      operationId: "login"
+      parameters:
+      - name: "email"
+        in: "query"
+        description: "Account email"
+        required: true
+        type: "string"
+        format: "email"
+      - name: "password"
+        in: "query"
+        description: "Account password"
+        required: true
+        type: "string"
+        minLength: 1
+        format: "password"
+      responses:
+        200:
+          description: "User logged in and received the token"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /logout:
+    get:
+      summary: "User logs out"
+      operationId: "logout"
+      parameters:
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User logged out"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /account:
+    get:
+      summary: "List accounts"
+      operationId: "list_accounts"
+      parameters:
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of accounts"
+          schema:
+            $ref: "#/definitions/Accounts"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new account"
+      operationId: "create_account"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "Account username"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "email"
+        in: "query"
+        description: "Account email"
+        required: true
+        type: "string"
+        format: "email"
+      - name: "password"
+        in: "query"
+        description: "Account password"
+        required: true
+        type: "string"
+        minLength: 1
+        format: "password"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Account created"
+        400:
+          description: "Bad request"
+        403:
+          description: "Duplicate entry forbidden"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /account/{account_id}:
+    get:
+      summary: "Get account"
+      operationId: "get_account"
+      parameters:
+      - name: "account_id"
+        in: "path"
+        description: "Account identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Account retrieved"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Account does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update account"
+      operationId: "update_account"
+      parameters:
+      - name: "account_id"
+        in: "path"
+        description: "Account identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_username"
+        in: "query"
+        description: "Account username"
+        required: false
+        type: "string"
+      - name: "email"
+        in: "query"
+        description: "Account email"
+        required: false
+        type: "string"
+        format: "email"
+      - name: "account_password"
+        in: "query"
+        description: "Account password"
+        required: false
+        type: "string"
+        format: "password"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Account updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Account does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete account"
+      operationId: "delete_account"
+      parameters:
+      - name: "account_id"
+        in: "path"
+        description: "Account identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Account deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "User does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects:
+    get:
+      summary: "List projects"
+      operationId: "list_projects"
+      parameters:
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of projects"
+          schema:
+            $ref: "#/definitions/Projects"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new project"
+      operationId: "create_projects"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Project created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}:
+    get:
+      summary: "Get project"
+      operationId: "get_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Project retrieved"
+          schema:
+            $ref: "#/definitions/Project"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Project does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update project"
+      operationId: "update_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "project_name"
+        in: "query"
+        description: "Project name"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Project updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Project does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete project"
+      operationId: "delete_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Project deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Project does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/users:
+    get:
+      summary: "List users in project"
+      operationId: "list_users_in_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of projects"
+          schema:
+            $ref: "#/definitions/Accounts"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/users/{account_id}:
+    put:
+      summary: "Add user to project"
+      operationId: "add_user_to_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id"
+        in: "path"
+        description: "Account identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User added to project"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Project does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Remove user from project"
+      operationId: "remove_user_from_project"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id"
+        in: "path"
+        description: "Account identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "User removed from project"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Project does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/processes:
+    get:
+      summary: "List processes"
+      operationId: "list_processes"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of processes"
+          schema:
+            $ref: "#/definitions/Processes"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new process"
+      operationId: "create_process"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "description"
+        in: "query"
+        description: "Description"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Process created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/processes/{process_id}:
+    get:
+      summary: "Get process"
+      operationId: "get_process"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "process_id"
+        in: "path"
+        description: "Process identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Process retrieved"
+          schema:
+            $ref: "#/definitions/Process"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Process does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update process"
+      operationId: "update_process"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "process_id"
+        in: "path"
+        description: "Process identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "dataclass_name"
+        in: "query"
+        description: "Dataclass name"
+        required: false
+        type: "string"
+      - name: "dataclass_description"
+        in: "query"
+        description: "Dataclass description"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Process updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Process does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete process"
+      operationId: "delete_process"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "process_id"
+        in: "path"
+        description: "Process identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Process deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Process does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/dataclasses:
+    get:
+      summary: "List dataclasses"
+      operationId: "list_dataclasses"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of dataclasses"
+          schema:
+            $ref: "#/definitions/Dataclasses"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new dataclass"
+      operationId: "create_dataclass"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "description"
+        in: "query"
+        description: "Description"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Dataclass created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/dataclasses/{dataclass_id}:
+    get:
+      summary: "Get dataclass"
+      operationId: "get_dataclass"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "dataclass_id"
+        in: "path"
+        description: "Dataclass identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Dataclass retrieved"
+          schema:
+            $ref: "#/definitions/Dataclass"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Dataclass does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update dataclass"
+      operationId: "update_dataclass"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "dataclass_id"
+        in: "path"
+        description: "Dataclass identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "dataclass_name"
+        in: "query"
+        description: "Dataclass name"
+        required: false
+        type: "string"
+      - name: "dataclass_description"
+        in: "query"
+        description: "Dataclass description"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Dataclass updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Dataclass does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete dataclass"
+      operationId: "delete_dataclass"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "dataclass_id"
+        in: "path"
+        description: "Dataclass identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Dataclass deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Dataclass does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /supportsystems:
+    get:
+      summary: "List support systems"
+      operationId: "list_support_systems"
+      parameters:
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of support systems"
+          schema:
+            $ref: "#/definitions/SupportSystems"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new support system"
+      operationId: "create_support_system"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Support system created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /supportsystems/{support_system_id}:
+    get:
+      summary: "Get support system"
+      operationId: "get_support_system"
+      parameters:
+      - name: "support_system_id"
+        in: "path"
+        description: "Support system identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Support system retrieved"
+          schema:
+            $ref: "#/definitions/SupportSystem"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Support system does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update support system"
+      operationId: "update_support_system"
+      parameters:
+      - name: "support_system_id"
+        in: "path"
+        description: "Support system identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "support_system_name"
+        in: "query"
+        description: "Support system name"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Support system updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Support system does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete support system"
+      operationId: "delete_support_system"
+      parameters:
+      - name: "support_system_id"
+        in: "path"
+        description: "Support system identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Support system deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Support system does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /organizationunits:
+    get:
+      summary: "List organization units"
+      operationId: "list_organization_units"
+      parameters:
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of organization units"
+          schema:
+            $ref: "#/definitions/SupportSystems"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new organization unit"
+      operationId: "create_organization_unit"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Organization unit created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /organizationunits/{organization_unit_id}:
+    get:
+      summary: "Get organization unit"
+      operationId: "get_organization_unit"
+      parameters:
+      - name: "organization_unit_id"
+        in: "path"
+        description: "Organization unit identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Organization unit retrieved"
+          schema:
+            $ref: "#/definitions/SupportSystem"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Organization unit does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update organization unit"
+      operationId: "update_organization_unit"
+      parameters:
+      - name: "organization_unit_id"
+        in: "path"
+        description: "Organization unit identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "support_system_name"
+        in: "query"
+        description: "Support system name"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Organization unit updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Organization unit does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete organization unit"
+      operationId: "delete_organization_unit"
+      parameters:
+      - name: "organization_unit_id"
+        in: "path"
+        description: "Organization unit identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Support system deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Support system does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/subsytems:
+    get:
+      summary: "List subsystems"
+      operationId: "list_subsystems"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "List of subsystems"
+          schema:
+            $ref: "#/definitions/Subsystems"
+        401:
+          description: "Unauthorized"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new subsystem"
+      operationId: "create_subsystem"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "name"
+        in: "query"
+        description: "Name"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "description"
+        in: "query"
+        description: "Description"
+        required: true
+        type: "string"
+        minLength: 1
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Subsystem created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/subsystems/{subsystem_id}:
+    get:
+      summary: "Get subsystem"
+      operationId: "get_subsystem"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "subsystem_id"
+        in: "path"
+        description: "Subsystem identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Subsystem retrieved"
+          schema:
+            $ref: "#/definitions/Subsystem"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Subsystem does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update subsystem"
+      operationId: "update_subsystem"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "subsystem_id"
+        in: "path"
+        description: "Subsystem identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "subsystem_name"
+        in: "query"
+        description: "Subsystem name"
+        required: false
+        type: "string"
+      - name: "subsystem_description"
+        in: "query"
+        description: "Subsystem description"
+        required: false
+        type: "string"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Subsystem updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Subsystem does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete subsystem"
+      operationId: "delete_subsystem"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "subsystem_id"
+        in: "path"
+        description: "Subsystem identifier located in the url path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Subsystem deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Subsystem does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/matrices/processdataclass:
+    get:
+      summary: "Get process X dataclass matrix"
+      operationId: "get_process_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix retrieved"
+          schema:
+            $ref: "#/definitions/ProcessDataclassMatrix"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new process X dataclass matrix"
+      operationId: "create_process_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "process_dataclass_matrix"
+        description: "Process X dataclass values"
+        required: true
+        schema:
+          $ref: "#/definitions/ProcessDataclassMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Matrix created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update process X dataclass matrix"
+      operationId: "update_process_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "process_dataclass_matrix"
+        description: "Process X dataclass values"
+        required: true
+        schema:
+          $ref: "#/definitions/ProcessDataclassMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete process X dataclass matrix"
+      operationId: "delete_process_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Matrix deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/matrices/supportsystemprocess:
+    get:
+      summary: "Get support system X process matrix"
+      operationId: "get_support_system_process_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix retrieved"
+          schema:
+            $ref: "#/definitions/SupportSystemProcessMatrix"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new support system X process matrix"
+      operationId: "create_support_system_process_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_process_matrix"
+        description: "Support system X process values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemProcessMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Matrix created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update support system X process matrix"
+      operationId: "update_support_system_process_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_process_matrix"
+        description: "Support system X process values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemProcessMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete support system X process matrix"
+      operationId: "delete_support_system_process_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Matrix deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/matrices/supportsystemdataclass:
+    get:
+      summary: "Get support system X dataclass matrix"
+      operationId: "get_support_system_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix retrieved"
+          schema:
+            $ref: "#/definitions/SupportSystemDataclassMatrix"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new support system X dataclass matrix"
+      operationId: "create_support_system_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_dataclass_matrix"
+        description: "Support system X dataclass values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemDataclassMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Matrix created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update support system X dataclass matrix"
+      operationId: "update_support_system_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_dataclass_matrix"
+        description: "Support system X dataclass values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemDataclassMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete support system X dataclass matrix"
+      operationId: "delete_support_system_dataclass_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Matrix deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /projects/{project_id}/matrices/supportsystemorganizationunit:
+    get:
+      summary: "Get support system X organization unit matrix"
+      operationId: "get_support_system_organization_unit_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix retrieved"
+          schema:
+            $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "Create new support system X organization unit matrix"
+      operationId: "create_support_system_organization_unit_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_organization_unit_matrix"
+        description: "Support system X organization unit values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Matrix created"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update support system X organization unit matrix"
+      operationId: "update_support_system_organization_unit_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "support_system_organization_unit_matrix"
+        description: "Support system X organization unit values"
+        required: true
+        schema:
+          $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Matrix updated"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      summary: "Delete support system X organization unit matrix"
+      operationId: "delete_support_system_organization_unit_matrix"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "Project Id"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "account_id_session"
+        in: "query"
+        description: "Account id of the session"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "token"
+        in: "query"
+        description: "Session token"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Matrix deleted"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Matrix does not exist"
+        500:
+          description: "Internal server error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  Accounts:
+    type: "array"
+    description: "Collection of accounts"
+    items:
+      $ref: "#/definitions/Account"
+  Account:
+    type: "object"
+    properties:
+      account_id:
+        type: "integer"
+        format: "int64"
+        description: "Account identifier"
+        readOnly: true
+      account_username:
+        type: "string"
+        description: "Account username"
+      account_email:
+        type: "string"
+        description: "Account email"
+      account_password:
+        type: "string"
+        format: "password"
+        description: "Account password"
+    description: "An account object"
+  Projects:
+    type: "array"
+    description: "Collection of projects"
+    items:
+      $ref: "#/definitions/Project"
+  Project:
+    type: "object"
+    properties:
+      project_id:
+        type: "integer"
+        format: "int64"
+        description: "Project identifier"
+        readOnly: true
+      project_name:
+        type: "string"
+        description: "Project Name"
+    description: "A project object"
+  Processes:
+    type: "array"
+    description: "Collection of processes"
+    items:
+      $ref: "#/definitions/Process"
+  Process:
+    type: "object"
+    properties:
+      process_id:
+        type: "integer"
+        format: "int64"
+        description: "Process identifier"
+        readOnly: true
+      process_name:
+        type: "string"
+        description: "Process name"
+      process_description:
+        type: "string"
+        description: "Process description"
+    description: "A process object"
+  Dataclasses:
+    type: "array"
+    description: "Collection of dataclasses"
+    items:
+      $ref: "#/definitions/Dataclass"
+  Dataclass:
+    type: "object"
+    properties:
+      dataclass_id:
+        type: "integer"
+        format: "int64"
+        description: "Dataclass identifier"
+        readOnly: true
+      dataclass_name:
+        type: "string"
+        description: "Dataclass name"
+      dataclassDescription:
+        type: "string"
+        description: "Dataclass description"
+    description: "A dataclass object"
+  SupportSystems:
+    type: "array"
+    description: "Collection of support systems"
+    items:
+      $ref: "#/definitions/SupportSystem"
+  SupportSystem:
+    type: "object"
+    properties:
+      support_system_id:
+        type: "integer"
+        format: "int64"
+        description: "Support system identifier"
+        readOnly: true
+      support_system_name:
+        type: "string"
+        description: "Support system name"
+    description: "A support system object"
+  Subsystems:
+    type: "array"
+    description: "Collection of subsystems"
+    items:
+      $ref: "#/definitions/Subsystem"
+  Subsystem:
+    type: "object"
+    properties:
+      subsystem_id:
+        type: "integer"
+        format: "int64"
+        description: "Subsystem identifier"
+        readOnly: true
+      subsystem_name:
+        type: "string"
+        description: "Subsystem name"
+      subsystem_description:
+        type: "string"
+        description: "Subsystem description"
+      subsystem_score_potential_benefits:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its potential benefits"
+      subsystem_score_impact:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its impact"
+      subsystem_score_prob_success:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its probability of success"
+      subsystem_score_demand:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its demand"
+      subsystem_score_cost:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its cost"
+      subsystem_score_dev_time:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem score for its development time"
+      subsystem_score_total:
+        type: "integer"
+        format: "int32"
+        description: "Subsystem total score"
+    description: "A subsystem object"
+  ProcessDataclassMatrix:
+    type: "array"
+    description: "Collection of processes X dataclasses"
+    items:
+      $ref: "#/definitions/ProcessDataclass"
+  ProcessDataclass:
+    type: "object"
+    properties:
+      process_id:
+        type: "integer"
+        format: "int64"
+        description: "Process identifier"
+      dataclass_id:
+        type: "integer"
+        format: "int64"
+        description: "Dataclass identifier"
+      process_dataclass_type:
+        type: "string"
+        description: "Process X dataclass type"
+      subsystem_id:
+        type: "integer"
+        format: "int64"
+        description: "Subsystem identifier"
+    description: "A process X dataclass object"
+  SupportSystemProcessMatrix:
+    type: "array"
+    description: "Collection of support systems X processes"
+    items:
+      $ref: "#/definitions/SupportSystemProcess"
+  SupportSystemProcess:
+    type: "object"
+    properties:
+      support_system_id:
+        type: "integer"
+        format: "int64"
+        description: "Support system identifier"
+      process_id:
+        type: "integer"
+        format: "int64"
+        description: "Process identifier"
+      support_system_process_type:
+        type: "string"
+        description: "Support system X process type"
+    description: "A support system X process object"
+  SupportSystemDataclassMatrix:
+    type: "array"
+    description: "Collection of support systems X dataclasses"
+    items:
+      $ref: "#/definitions/SupportSystemDataclass"
+  SupportSystemDataclass:
+    type: "object"
+    properties:
+      support_system_id:
+        type: "integer"
+        format: "int64"
+        description: "Support system identifier"
+      dataclass_id:
+        type: "integer"
+        format: "int64"
+        description: "Dataclass identifier"
+    description: "A support system X dataclass object"
+  SupportSystemOrganizationUnitMatrix:
+    type: "array"
+    description: "Collection of support systems X organization units"
+    items:
+      $ref: "#/definitions/SupportSystemOrganizationUnit"
+  SupportSystemOrganizationUnit:
+    type: "object"
+    properties:
+      support_system_id:
+        type: "integer"
+        format: "int64"
+        description: "Support system identifier"
+      organization_unit_id:
+        type: "integer"
+        format: "int64"
+        description: "Organization unit identifier"
+      support_system_organization_unit_type:
+        type: "string"
+        description: "Process X dataclass type"
+    description: "A support system X organization unit object"
+  inline_response_200:
+    properties:
+      accountId:
+        type: "integer"
+        format: "int64"
+      token:
+        type: "string"
+parameters:
+  username:
+    name: "username"
+    in: "query"
+    description: "Account username"
+    required: true
+    type: "string"
+    minLength: 1
+  password:
+    name: "password"
+    in: "query"
+    description: "Account password"
+    required: true
+    type: "string"
+    minLength: 1
+    format: "password"
+  email:
+    name: "email"
+    in: "query"
+    description: "Account email"
+    required: true
+    type: "string"
+    format: "email"
+  account_id_session:
+    name: "account_id_session"
+    in: "query"
+    description: "Account id of the session"
+    required: true
+    type: "integer"
+    format: "int64"
+  token:
+    name: "token"
+    in: "query"
+    description: "Session token"
+    required: true
+    type: "string"
+  name:
+    name: "name"
+    in: "query"
+    description: "Name"
+    required: true
+    type: "string"
+    minLength: 1
+  description:
+    name: "description"
+    in: "query"
+    description: "Description"
+    required: true
+    type: "string"
+    minLength: 1
+  project_id:
+    name: "project_id"
+    in: "path"
+    description: "Project Id"
+    required: true
+    type: "integer"
+    format: "int64"
+  account_id:
+    name: "account_id"
+    in: "path"
+    description: "Account identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  process_id:
+    name: "process_id"
+    in: "path"
+    description: "Process identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  dataclass_id:
+    name: "dataclass_id"
+    in: "path"
+    description: "Dataclass identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  support_system_id:
+    name: "support_system_id"
+    in: "path"
+    description: "Support system identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  organization_unit_id:
+    name: "organization_unit_id"
+    in: "path"
+    description: "Organization unit identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  subsystem_id:
+    name: "subsystem_id"
+    in: "path"
+    description: "Subsystem identifier located in the url path"
+    required: true
+    type: "integer"
+    format: "int64"
+  matrix_type:
+    name: "matrix_type"
+    in: "path"
+    description: "Matrix type located in the url path"
+    required: true
+    type: "string"
+    minLength: 1
+  account_username:
+    name: "account_username"
+    in: "query"
+    description: "Account username"
+    required: false
+    type: "string"
+  account_email:
+    name: "email"
+    in: "query"
+    description: "Account email"
+    required: false
+    type: "string"
+    format: "email"
+  account_password:
+    name: "account_password"
+    in: "query"
+    description: "Account password"
+    required: false
+    type: "string"
+    format: "password"
+  project_name:
+    name: "project_name"
+    in: "query"
+    description: "Project name"
+    required: false
+    type: "string"
+  process_name:
+    name: "process_name"
+    in: "query"
+    description: "Process name"
+    required: false
+    type: "string"
+  process_description:
+    name: "process_description"
+    in: "query"
+    description: "Process description"
+    required: false
+    type: "string"
+  dataclass_name:
+    name: "dataclass_name"
+    in: "query"
+    description: "Dataclass name"
+    required: false
+    type: "string"
+  dataclass_description:
+    name: "dataclass_description"
+    in: "query"
+    description: "Dataclass description"
+    required: false
+    type: "string"
+  support_system_name:
+    name: "support_system_name"
+    in: "query"
+    description: "Support system name"
+    required: false
+    type: "string"
+  subsystem_name:
+    name: "subsystem_name"
+    in: "query"
+    description: "Subsystem name"
+    required: false
+    type: "string"
+  subsystem_description:
+    name: "subsystem_description"
+    in: "query"
+    description: "Subsystem description"
+    required: false
+    type: "string"
+  process_dataclass_matrix:
+    in: "body"
+    name: "process_dataclass_matrix"
+    description: "Process X dataclass values"
+    required: true
+    schema:
+      $ref: "#/definitions/ProcessDataclassMatrix"
+  support_system_process_matrix:
+    in: "body"
+    name: "support_system_process_matrix"
+    description: "Support system X process values"
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemProcessMatrix"
+  support_system_dataclass_matrix:
+    in: "body"
+    name: "support_system_dataclass_matrix"
+    description: "Support system X dataclass values"
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemDataclassMatrix"
+  support_system_organization_unit_matrix:
+    in: "body"
+    name: "support_system_organization_unit_matrix"
+    description: "Support system X organization unit values"
+    required: true
+    schema:
+      $ref: "#/definitions/SupportSystemOrganizationUnitMatrix"
