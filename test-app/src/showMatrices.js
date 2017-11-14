@@ -24,26 +24,26 @@ class Matrix extends Component {
         <thead>
           <tr>
             <th className="tableHeader">{this.props.gsi} </th>
-            <th className="tableHeader">Process 1 </th>
-            <th className="tableHeader">Process 2</th>
-            <th className="tableHeader">Process 3</th>
+            <th className="tableHeader"> #1 </th>
+            <th className="tableHeader"> #2 </th>
+            <th className="tableHeader"> #3 </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="tableHeader">Class 1</td>
+            <td className="tableHeader"> #1 </td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td className="tableHeader">Class 2</td>
+            <td className="tableHeader"> #2 </td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td className="tableHeader">Class 3</td>
+            <td className="tableHeader"> #3 </td>
             <td></td>
             <td></td>
             <td></td>
