@@ -154,7 +154,19 @@ def create_projects(name, account_id_session, token):
 
     :rtype: None
     """
-    return 'do some magic!'
+
+    if account_id_session in tokens and tokens[account_id_session] == token:
+        project = Project(project_name=name)
+        db_session.add(project)
+
+        #try:
+        db_session.commit()
+        #except:
+        #    return None, 500
+
+        return None, 201
+
+    return None, 401
 
 
 def create_subsystem(project_id, name, description, account_id_session, token):
@@ -688,7 +700,12 @@ def list_projects(account_id_session, token):
 
     :rtype: Projects
     """
-    return 'do some magic!'
+
+    if account_id_session in tokens and tokens[account_id_session] == token:
+        projects = db_session.query(Project).all()
+        return projects, 200
+
+    return None, 401
 
 
 def list_subsystems(project_id, account_id_session, token):
@@ -749,18 +766,12 @@ def login(email, password):
     :rtype: InlineResponse200
     """
 
-    print("login method was called...")
-
-    print("email --> " + email)
-    print("password --> " + password)
-
     account = db_session.query(Account).filter(Account._account_email == email).first()
 
     if account is None:
         return None, 401
 
     tokens[account.account_id] = uuid.uuid4().hex
-
     object = InlineResponse200(account_id=account.account_id, token=tokens[account.account_id])
 
     return object, 200
@@ -777,7 +788,13 @@ def logout(account_id_session, token):
 
     :rtype: None
     """
-    return 'do some magic!'
+
+    if account_id_session in tokens and tokens[account_id_session] == token:
+        del tokens[account_id_session]
+    else:
+        return None, 401
+
+    return None, 200
 
 
 def remove_user_from_project(project_id, account_id, account_id_session, token):
