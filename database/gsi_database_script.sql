@@ -107,7 +107,7 @@ CREATE TABLE "gsi_database"."public"."ss_dataclass" (
 CREATE TABLE "gsi_database"."public"."ss_organization_unit" (
                 "_support_system_id" INTEGER NOT NULL,
                 "_organization_unit_id" INTEGER NOT NULL,
-                "ss_organization_unit_support_type" VARCHAR(30),
+                "_ss_organization_unit_support_type" VARCHAR(30),
                 "_project_id" INTEGER NOT NULL,
                 CONSTRAINT "_ss_organization_unit_id" PRIMARY KEY ("_support_system_id", "_organization_unit_id")
 );
