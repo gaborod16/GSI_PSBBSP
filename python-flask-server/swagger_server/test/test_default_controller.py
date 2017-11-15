@@ -121,13 +121,15 @@ class TestDefaultController(BaseTestCase):
                                     query_string=query_string)
         self.assert200(response, "Response body is : " + response.data.decode('utf-8'))
 
-    def test_create_projects(self):
+    def test_create_project(self):
         """
-        Test case for create_projects
+        Test case for create_project
 
         Create new project
         """
         query_string = [('name', 'name_example'),
+                        ('project_owner_id', 789),
+                        ('secretary_id', 789),
                         ('account_id_session', 789),
                         ('token', 'token_example')]
         response = self.client.open('/projects',

@@ -30,9 +30,10 @@
         <entry file="file://$PROJECT_DIR$/swagger_server/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+              <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
               <folding>
                 <element signature="e#24#40#0" expanded="true" />
+                <marker date="1510662877002" expanded="true" signature="116:402" ph="..." />
               </folding>
             </state>
           </provider>
@@ -41,8 +42,8 @@
       <file leaf-file-name="default_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+            <state relative-caret-position="236">
+              <caret line="152" column="19" lean-forward="false" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -53,20 +54,43 @@
       <file leaf-file-name="account.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger_server/models/account.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="58" />
+            <state relative-caret-position="238">
+              <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding>
                 <element signature="e#17#55#0" expanded="true" />
+                <marker date="1510662877010" expanded="true" signature="755:4560" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="882:1946" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="891:1353" ph="&quot;&quot;&quot;Account - a model defined in Swagger...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="1384:1531" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="1564:1762" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="2007:2231" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="2016:2187" ph="&quot;&quot;&quot;Returns the dict as a model...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="2279:2477" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="2288:2445" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="2544:2769" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="2553:2730" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="2823:3037" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="2832:2999" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="3122:3381" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="3131:3330" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="3432:3634" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="3441:3599" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="3710:3948" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="3719:3903" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="4002:4216" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="4011:4178" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1510662877010" expanded="true" signature="4301:4560" ph="..." />
+                <marker date="1510662877010" expanded="true" signature="4310:4509" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="project.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/swagger_server/models/project.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+            <state relative-caret-position="374">
+              <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
               <folding>
                 <element signature="e#17#55#0" expanded="true" />
               </folding>
@@ -74,7 +98,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="swagger.yaml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="swagger.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger_server/swagger/swagger.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="219">
@@ -119,12 +143,13 @@
       <find>login</find>
       <find>inline_response_200</find>
       <find>create_proj</find>
-      <find>create new project</find>
       <find>_a</find>
       <find>list_projec</find>
       <find>if</find>
       <find>account_id_session not int</find>
       <find>create_project</find>
+      <find>create new project</find>
+      <find>create_proje</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -136,9 +161,9 @@
         <option value="$PROJECT_DIR$/swagger_server/models/base_model_.py" />
         <option value="$PROJECT_DIR$/swagger_server/encoder.py" />
         <option value="$PROJECT_DIR$/swagger_server/models/account.py" />
+        <option value="$PROJECT_DIR$/swagger_server/swagger/swagger.yaml" />
         <option value="$PROJECT_DIR$/swagger_server/models/project.py" />
         <option value="$PROJECT_DIR$/swagger_server/controllers/default_controller.py" />
-        <option value="$PROJECT_DIR$/swagger_server/swagger/swagger.yaml" />
       </list>
     </option>
   </component>
@@ -313,13 +338,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1984375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.50208336" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980973" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -542,20 +566,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/swagger_server/models/account.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="58" />
+        <state relative-caret-position="238">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
             <element signature="e#17#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/swagger_server/models/project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="e#17#55#0" expanded="true" />
+            <marker date="1510662877010" expanded="true" signature="755:4560" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="882:1946" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="891:1353" ph="&quot;&quot;&quot;Account - a model defined in Swagger...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="1384:1531" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="1564:1762" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="2007:2231" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="2016:2187" ph="&quot;&quot;&quot;Returns the dict as a model...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="2279:2477" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="2288:2445" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="2544:2769" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="2553:2730" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="2823:3037" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="2832:2999" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="3122:3381" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="3131:3330" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="3432:3634" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="3441:3599" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="3710:3948" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="3719:3903" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="4002:4216" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="4011:4178" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1510662877010" expanded="true" signature="4301:4560" ph="..." />
+            <marker date="1510662877010" expanded="true" signature="4310:4509" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
           </folding>
         </state>
       </provider>
@@ -563,19 +600,10 @@
     <entry file="file://$PROJECT_DIR$/swagger_server/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+          <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
           <folding>
             <element signature="e#24#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <marker date="1510662877002" expanded="true" signature="116:402" ph="..." />
           </folding>
         </state>
       </provider>
@@ -585,6 +613,26 @@
         <state relative-caret-position="219">
           <caret line="278" column="20" lean-forward="false" selection-start-line="278" selection-start-column="20" selection-end-line="278" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="152" column="19" lean-forward="false" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/swagger_server/models/project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+          <folding>
+            <element signature="e#17#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -141,12 +141,16 @@ def create_process_dataclass_matrix(project_id, process_dataclass_matrix, accoun
     return 'do some magic!'
 
 
-def create_projects(name, account_id_session, token):
+def create_projects(name, project_owner_id, secretary_id, account_id_session, token):
     """
     Create new project
     
     :param name: Name
     :type name: str
+    :param project_owner_id: Account id of the project owner
+    :type project_owner_id: int
+    :param secretary_id: Account id of the project secretary
+    :type secretary_id: int
     :param account_id_session: Account id of the session
     :type account_id_session: int
     :param token: Session token

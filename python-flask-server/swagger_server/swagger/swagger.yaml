@@ -269,7 +269,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
     post:
       summary: "Create new project"
-      operationId: "create_projects"
+      operationId: "create_project"
       parameters:
       - name: "name"
         in: "query"
@@ -277,6 +277,18 @@ paths:
         required: true
         type: "string"
         minLength: 1
+      - name: "project_owner_id"
+        in: "query"
+        description: "Account id of the project owner"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "secretary_id"
+        in: "query"
+        description: "Account id of the project secretary"
+        required: true
+        type: "integer"
+        format: "int64"
       - name: "account_id_session"
         in: "query"
         description: "Account id of the session"
@@ -2278,6 +2290,20 @@ parameters:
     description: "Session token"
     required: true
     type: "string"
+  project_owner_id:
+    name: "project_owner_id"
+    in: "query"
+    description: "Account id of the project owner"
+    required: true
+    type: "integer"
+    format: "int64"
+  secretary_id:
+    name: "secretary_id"
+    in: "query"
+    description: "Account id of the project secretary"
+    required: true
+    type: "integer"
+    format: "int64"
   name:
     name: "name"
     in: "query"
