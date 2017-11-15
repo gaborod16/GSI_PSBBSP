@@ -19,3 +19,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# server misc
+/python-flask-server/.idea/misc.xml
+/python-flask-server/.idea/python-flask-server.iml
+/python-flask-server/.idea/workspace.xml
