@@ -18,53 +18,53 @@ class Matrix extends Component {
   }
     
      onPress(){
-       this.setState({
-            dropTitle: "wtf"
-        });
+       // this.setState({
+       //      dropTitle: "wtf"
+       //  });
     }
 
   render() {
       
        const choices = [];
       
-       if( this.props.type == 1 ) {
-           choices.length = 0;
-        for (var i = 0; i < this.state.numChildren; i += 1) {
-            choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("A")}> A </MenuItem>);
-            choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("P")}> P </MenuItem>);
-            choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("A/P")}> A/P </MenuItem>);
-            choices.push(<MenuItem key={4} eventKey={4} onClick={this.onPress("none")}> none </MenuItem>);
-        };
-    }
-    
-      if( this.props.type == 2 ) {
-          choices.length = 0;
-        for (var i = 0; i < this.state.numChildren; i += 1) {
-            choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("X")}> X </MenuItem>);
-            choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("none")}> none </MenuItem>);
-            
-        };
-    }
-
-    
-     if( this.props.type == 3 ) {
+    if( this.props.type == 1 ) {
          choices.length = 0;
-        for (var i = 0; i < this.state.numChildren; i += 1) {
-            choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("D")}> D </MenuItem>);
-            choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("F")}> F </MenuItem>);
-            choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("A")}> A </MenuItem>);
-            choices.push(<MenuItem key={4} eventKey={4} onClick={this.onPress("none")}> none </MenuItem>);
-            
-        };
+      for (var i = 0; i < this.state.numChildren; i += 1) {
+          choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("A")}> A </MenuItem>);
+          choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("P")}> P </MenuItem>);
+          choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("A/P")}> A/P </MenuItem>);
+          choices.push(<MenuItem key={4} eventKey={4} onClick={this.onPress("none")}> none </MenuItem>);
+      };
+    }
+    
+    if( this.props.type == 2 ) {
+        choices.length = 0;
+      for (var i = 0; i < this.state.numChildren; i += 1) {
+          choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("X")}> X </MenuItem>);
+          choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("none")}> none </MenuItem>);
+          
+      };
     }
 
-      if( this.props.type == 4 ) {
-          choices.length = 0;
-        for (var i = 0; i < this.state.numChildren; i += 1) {
-            choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("U")}> U </MenuItem>);
-            choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("C")}> C </MenuItem>);
-            choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("none")}> none </MenuItem>);
-        };
+    
+   if( this.props.type == 3 ) {
+       choices.length = 0;
+      for (var i = 0; i < this.state.numChildren; i += 1) {
+          choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("D")}> D </MenuItem>);
+          choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("F")}> F </MenuItem>);
+          choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("A")}> A </MenuItem>);
+          choices.push(<MenuItem key={4} eventKey={4} onClick={this.onPress("none")}> none </MenuItem>);
+          
+      };
+    }
+
+    if( this.props.type == 4 ) {
+        choices.length = 0;
+      for (var i = 0; i < this.state.numChildren; i += 1) {
+          choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("U")}> U </MenuItem>);
+          choices.push(<MenuItem key={2} eventKey={2} onClick={this.onPress("C")}> C </MenuItem>);
+          choices.push(<MenuItem key={3} eventKey={3} onClick={this.onPress("none")}> none </MenuItem>);
+      };
     }
                     
                     
@@ -125,31 +125,31 @@ class ShowMatrices extends Component {
 
         
     onPressOne(){
-        this.setState({
-            title: "Supp. System / Org. Unit",
-            matrixType: 1        
-        });
+        // this.setState({
+        //     title: "Supp. System / Org. Unit",
+        //     matrixType: 1        
+        // });
     }
     
     onPressTwo(){
-        this.setState({
-            title: "Supp. System / Data Class",
-            matrixType: 2
-        });
+        // this.setState({
+        //     title: "Supp. System / Data Class",
+        //     matrixType: 2
+        // });
     }
     
     onPressThree(){
-        this.setState({
-            title: "Supp. System / Process",
-            matrixType: 3
-        });
+        // this.setState({
+        //     title: "Supp. System / Process",
+        //     matrixType: 3
+        // });
     }
     
     onPressFour(){
-        this.setState({
-            title: "Data Class/Process",
-            matrixType: 4
-        });
+        // this.setState({
+        //     title: "Data Class/Process",
+        //     matrixType: 4
+        // });
     }
     
     

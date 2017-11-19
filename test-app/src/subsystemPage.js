@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import {PageHeader, Form, Checkbox, Col, Button, Accordion, Panel, FormControl, ListGroup, MenuItem, ListGroupItem, FormGroup, ButtonGroup, DropdownButton, Glyphicon, ControlLabel, Row, ProgressBar} from 'react-bootstrap';
 
 import Template from './template';
-import YouSeeing from './youSeeing'
+import YouSeeing from './youSeeing';
+import CircleGroup from './circleGroup';
+import ListTable from './listTable';
+import ProblemTable from './problemTable';
+
+const plus = 'assets/plus.png';
 
 const SpecificScore = ({ scoreName, points, plusFunc, minusFunc }) => (
   <Row>
@@ -72,6 +77,11 @@ class Subsystem extends Component {
     this.state = {
     }
     this.subsName = 'Cluster de recursos';
+    this.list = [{index: 1, name: 'P1 <-> DC2'}, {index: 2, name: 'P6 <-> DC4'}, {index: 3, name: 'P3 <-> DC1'}];
+    this.problemList = [
+              {index: 1, problem: 'Not enough control on HR', consequence: 'The work of employees is unbalanced', solution: 'Hire HR specialist'}, 
+              {index: 2, problem: 'Problem 2', consequence: 'Catastrophic consequence', solution: 'Pray everyday'}, 
+    ];
   }
 
   render() {
@@ -79,53 +89,51 @@ class Subsystem extends Component {
       <Template history={this.props.history}>
         <YouSeeing title={"Subsystem: " + this.subsName}/>
         <Row>
-          <Col componentClass={ControlLabel} sm={2} md={2}>
-            Description:
-          </Col>
-          <Col sm={9} md={6}>
-            <FormControl
-              componentClass="textarea"
-              defaultValue="" //com deafultvalue fica alteravel
-              placeholder="Enter a description for this subsystem"
-            />
-          </Col>
-        </Row>
 
-        <br/>
+          <Col md={3} sm={4} className="circle-create-col">
+            <CircleGroup name="Add Process-Data Class Relation" func={this.openModalAddMember} image={plus}/>
+            <CircleGroup name="Add Detected Problem" func={this.redirectNewProcess} image={plus}/>
+          </Col>
 
-        <Row>
-          <Col componentClass={ControlLabel} sm={2} md={2}>
-            Scores:
-          </Col>
-           <Col sm={9} md={6}>
-            <Accordion>
-              <Panel header="Click here to see the specific scores" eventKey="1">
-                <SpecificScore scoreName="Impact" points={5}/>
-                <SpecificScore scoreName="Potential Benefits" points={6}/>
-                <SpecificScore scoreName="Probability of Success" points={8}/>
-                <SpecificScore scoreName="Demand" points={4}/>
-                <SpecificScore scoreName="Cost" points={7}/>
-                <SpecificScore scoreName="Development Time" points={9}/>
-              </Panel>
-            </Accordion>
-          </Col>
-        </Row>
+          <Col md={9} sm={8}>
+            <Row>
+              <Col componentClass={ControlLabel} sm={2} md={2}>
+                Description:
+              </Col>
+              <Col sm={9} md={6}>
+                <FormControl
+                  componentClass="textarea"
+                  defaultValue=""
+                  placeholder="Enter a description for this subsystem"
+                />
+              </Col>
+            </Row>
 
-        <Row>
-          <Col componentClass={ControlLabel} sm={2} md={2}>
-            Total score:
-          </Col>
-           <Col sm={9} md={6}>
-            <ProgressBar bsStyle="success" label={'7.4/10'} now={7.4} min={0} max={10}/>
+            <br/>
+
+            <Row>
+              <Col sm={11} md={8}>
+                <ListTable 
+                  entityName="Process-DataClass Relation" 
+                  data={this.list}
+                  editFunc={this.openModalEdit}
+                  disableEdit={true}
+                  deleteFunc={this.deletePDPair}
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
 
         <hr/>
 
         <Row>
-          <Col sm={11} md={8}>
-            <SubsystemRelations title="Receives information from..."/>
-            <SubsystemRelations title="Sends information to..."/>
+          <Col sm={11} md={9}>
+            <ProblemTable 
+              data={this.problemList}
+              editFunc={this.openModalEditProblem}
+              deleteFunc={this.deleteProblem}
+            />
           </Col>
         </Row>
       </Template>

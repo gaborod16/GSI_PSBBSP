@@ -6,6 +6,7 @@ import CircleGroup from './circleGroup'
 import YouSeeing from './youSeeing'
 import EntityButton from './entityButton'
 import ModalAddMember from './modalAddMember'
+import ModalAddSubs from './modals'
 
 const plus = 'assets/plus.png';
 const lookup = 'assets/lookup.png';
@@ -16,30 +17,46 @@ class ProjectPage extends Component {
     super();
     this.state = {
       user: '',
-      showModal: false,
-      tempMemberIndex: -1
+      showModalAddMember: false,
+      showModalAddSubs: false,
+      tempMemberIndex: -1,
+      tempSubsytemName: ''
     }
     
     this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];
     this.projName = "My BSP Project";
+
     this.redirectNewProcess = this.redirectNewProcess.bind(this);
     this.redirectNewDataClass = this.redirectNewDataClass.bind(this);
     this.redirectSubsystemPage = this.redirectSubsystemPage.bind(this);
     this.redirectCheckMatrices = this.redirectCheckMatrices.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.redirectProblemsSolutions = this.redirectProblemsSolutions.bind(this);
+    this.openModalAddMember = this.openModalAddMember.bind(this);
+    this.closeModalAddMember = this.closeModalAddMember.bind(this);
+    this.openModalAddSubs = this.openModalAddSubs.bind(this);
+    this.closeModalAddSubs = this.closeModalAddSubs.bind(this);
     this.onSelectMember = this.onSelectMember.bind(this);
+    this.onChangeSubsystem = this.onChangeSubsystem.bind(this);
     this.addNewMember = this.addNewMember.bind(this);
+    this.addNewSubsystem = this.addNewSubsystem.bind(this);
     this.removeSubsystem = this.removeSubsystem.bind(this);
     this.getSubsystems = this.getSubsystems.bind(this);
   }
 
-  closeModal() {
-    this.setState({ showModal: false });
+  closeModalAddMember() {
+    this.setState({ showModalAddMember: false });
   }
 
-  openModal() {
-    this.setState({ showModal: true });
+  closeModalAddSubs() {
+    this.setState({ showModalAddSubs: false });
+  }
+
+  openModalAddMember() {
+    this.setState({ showModalAddMember: true });
+  }
+
+  openModalAddSubs() {
+    this.setState({ showModalAddSubs: true });
   }
 
   onSelectMember(index) {
@@ -47,10 +64,21 @@ class ProjectPage extends Component {
     this.setState({tempMemberIndex: index});
   }
 
+  onChangeSubsystem(e) {
+    console.log(e.target.value);
+    this.setState({tempSubsytemName: e.target.value});
+  }
+
   addNewMember(e) {
     e.preventDefault();
-    this.setState({ showModal: false });
+    this.setState({ showModalAddMember: false });
     console.log(this.state.tempMemberIndex);
+  }
+
+  addNewSubsystem(e) {
+    e.preventDefault();
+    this.setState({ showModalAddSubs: false });
+    console.log(this.state.tempSubsytemName);
   }
     
   redirectNewProcess() {     
@@ -67,6 +95,10 @@ class ProjectPage extends Component {
 
   redirectCheckMatrices() {
     this.props.history.push('./showMatrices');
+  }
+
+  redirectProblemsSolutions() {
+    this.props.history.push('./problemsSolutions');
   }
 
   removeSubsystem(index) {
@@ -102,20 +134,31 @@ class ProjectPage extends Component {
           title="Add a New Member to the Project"
           entity="Add New Member"
           listUsers={this.listUsers}
-          showModal={this.state.showModal} 
-          cancelFunc={this.closeModal} 
+          showModal={this.state.showModalAddMember} 
+          cancelFunc={this.closeModalAddMember} 
           onSelectFunc={this.onSelectMember}
           submitFunc={this.addNewMember}
+        />
+
+        <ModalAddSubs 
+          title="Add a New Subsystem"
+          entity="Subsystem"
+          showModal={this.state.showModalAddSubs} 
+          cancelFunc={this.closeModalAddSubs} 
+          onChangeFunc={this.onChangeSubsystem}
+          submitFunc={this.addNewSubsystem}
         />
 
         <YouSeeing title={"Project: " + this.projName}/>
         
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
-            <CircleGroup name="Add Member" func={this.openModal} image={plus}/>
+            <CircleGroup name="Add Member" func={this.openModalAddMember} image={plus}/>
             <CircleGroup name="Create New Process" func={this.redirectNewProcess} image={plus}/>
             <CircleGroup name="Create New Data Class" func={this.redirectNewDataClass} image={plus}/>
+            <CircleGroup name="Create New Subsystem" func={this.openModalAddSubs} image={plus}/>
             <CircleGroup name="Check BSP Matrices" func={this.redirectCheckMatrices} image={lookup}/>
+            <CircleGroup name="Check Problems and Solutions" func={this.redirectProblemsSolutions} image={lookup}/>
           </Col>
 
           <Col md={6} sm={4} className="center-text">

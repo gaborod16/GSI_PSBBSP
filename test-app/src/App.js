@@ -16,6 +16,7 @@ import NewProcess from './newProcess';
 import ShowMatrices from './showMatrices';
 import NewDataClass from './newDataClass';
 import Subsystem from './subsystemPage';
+import ProblemsSolutions from './problemsSolutions';
 
 class Content extends Component {
   render() {
@@ -33,6 +34,7 @@ class Content extends Component {
           <Route path={'/showMatrices'} exact component={ShowMatrices}></Route>
           <Route path={'/newDataClass'} exact component={NewDataClass}></Route>
           <Route path={'/subsystemPage'} exact component={Subsystem}></Route>
+          <Route path={'/problemsSolutions'} exact component={ProblemsSolutions}></Route>
         </Switch>
     );
   }
