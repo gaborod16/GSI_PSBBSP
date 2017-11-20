@@ -4,6 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 
 import './template.css';
 
+import * as path from './paths';
 import Login from './loginForm';
 import Register from './register';
 import MainPage from './mainPage';
@@ -22,13 +23,13 @@ class Content extends Component {
   render() {
     return (
         <Switch>
-          <Route path={'/'} exact component={MainPage}></Route>
-          <Route path={'/login'} exact component={Login}></Route>
-          <Route path={'/register'} exact component={Register}></Route>
+          <Route path={path.ROOT} exact component={MainPage}></Route>
+          <Route path={path.LOGIN} exact component={Login}></Route>
+          <Route path={path.REGISTER} exact component={Register}></Route>
           <Route path={'/listOrganizationUnits'} exact component={ListOrganizationUnits}></Route>
           <Route path={'/listSupportSystems'} exact component={ListSupportSystems}></Route>
-          <Route path={'/newProject'} exact component={NewProject}></Route>
-          <Route path={'/project/:number'} exact component={EditProject}></Route>
+          <Route path={path.NEW_PROJECT} exact component={NewProject}></Route>
+          <Route path={'/project/:proj_id'} exact component={EditProject}></Route>
           <Route path={'/projectPage'} exact component={ProjectPage}></Route>
           <Route path={'/newProcess'} exact component={NewProcess}></Route>
           <Route path={'/showMatrices'} exact component={ShowMatrices}></Route>

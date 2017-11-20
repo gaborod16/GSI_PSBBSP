@@ -8,7 +8,7 @@ class EditProject extends Component {
   constructor(props) {
     super(props);
 
-    this.projID = this.props.match.params.number; //USE THIS TO GET THE PROJECT AND FILL FIELDS
+    this.projID = this.props.match.params.proj_id; //USE THIS TO GET THE PROJECT AND FILL FIELDS
     this.state = {
       user: '',
       projectName: "My first BSP project",

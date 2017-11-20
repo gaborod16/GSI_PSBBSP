@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col, Image} from 'react-bootstrap';
 
+import * as path from './paths';
+
 import Template from './template';
 import CircleGroup from './circleGroup'
 import YouSeeing from './youSeeing'
@@ -29,7 +31,7 @@ class MainPage extends Component {
   }
     
   redirectNewProject() {
-    this.props.history.push('./newProject')
+    this.props.history.push(path.NEW_PROJECT)
   }
 
   redirectEditProject(index) {
@@ -37,7 +39,7 @@ class MainPage extends Component {
   }
 
   redirectRegister() {
-    this.props.history.push('./register')
+    this.props.history.push(path.REGISTER)
   }
     
   redirectProjectPage() {
