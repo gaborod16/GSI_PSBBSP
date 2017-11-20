@@ -12,6 +12,7 @@ class SideBar extends Component {
     }
 
     this.logout = this.props.logout.bind(this);
+    this.goBack = this.props.goBack.bind(this);
   }
 
   render() {
@@ -24,7 +25,9 @@ class SideBar extends Component {
             <p>John Doe</p>
             <p>Role: Admin</p>
             <p>Organization: IBM</p>
+            <br/>
             <hr/>
+            <Button bsStyle='warning' bsSize='small' onClick={this.goBack} block>Go back</Button>
             <Button bsStyle='danger' bsSize='small' onClick={this.logout} block>Log out</Button>
           </div>
         </Col>
@@ -38,16 +41,21 @@ class Template extends Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   logout() {
     this.props.history.push('./login')
   }
 
+  goBack() {
+    this.props.history.push('../');
+  }
+
   render() {
     return (
       <Row>
-        <SideBar logout={this.logout}/>
+        <SideBar logout={this.logout} goBack={this.goBack}/>
         <Col lg={10} md={9} sm={9} xs={9}>
           {this.props.children}
         </Col>
