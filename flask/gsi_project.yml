@@ -148,9 +148,11 @@ paths:
           description: Unauthorized
     post:
       summary: Create new project
-      operationId: create_projects
+      operationId: create_project
       parameters:
       - $ref: "#/parameters/name"
+      - $ref: "#/parameters/account_id_team_leader"
+      - $ref: "#/parameters/account_id_secretary"
       - $ref: "#/parameters/account_id_session"
       - $ref: "#/parameters/token"
       responses:
@@ -1057,6 +1059,15 @@ definitions:
       project_name:
         type: string
         description: Project Name
+      account_id_team_leader:
+        type: integer
+        format: int64
+        description: Project team leader id
+        readOnly: true
+      account_id_secretary:
+        type: integer
+        format: int64
+        description: Project secretary id
   Processes:
     type: array
     description: Collection of processes
@@ -1278,6 +1289,20 @@ parameters:
     description: Session token
     in: query
     type: string
+    required: true
+  account_id_team_leader:
+    name: account_id_team_leader
+    description: Account id of the project team leader
+    in: query
+    type: integer
+    format: int64
+    required: true
+  account_id_secretary:
+    name: account_id_secretary
+    description: Account id of the project secretary
+    in: query
+    type: integer
+    format: int64
     required: true
   name:
     name: name

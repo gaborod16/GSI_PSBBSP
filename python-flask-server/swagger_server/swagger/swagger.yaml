@@ -2060,6 +2060,15 @@ definitions:
       project_name:
         type: "string"
         description: "Project Name"
+      project_owner_id:
+        type: "integer"
+        format: "int64"
+        description: "Project owner id"
+        readOnly: true
+      secretary_id:
+        type: "integer"
+        format: "int64"
+        description: "Project secretary id"
     description: "A project object"
   Processes:
     type: "array"

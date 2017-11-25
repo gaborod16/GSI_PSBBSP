@@ -21,6 +21,8 @@ class Account(Model, Base):
     _account_password = Column(String(65), nullable=True)
     _account_email = Column(String(255), unique=True, nullable=True)
 
+    _projects = relationship("Project", backref="account")
+
     def __init__(self, account_id: int=None, account_username: str=None, account_email: str=None, account_password: str=None):
         """
         Account - a model defined in Swagger
