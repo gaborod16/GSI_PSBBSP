@@ -277,13 +277,13 @@ paths:
         required: true
         type: "string"
         minLength: 1
-      - name: "project_owner_id"
+      - name: "account_id_team_leader"
         in: "query"
-        description: "Account id of the project owner"
+        description: "Account id of the project team leader"
         required: true
         type: "integer"
         format: "int64"
-      - name: "secretary_id"
+      - name: "account_id_secretary"
         in: "query"
         description: "Account id of the project secretary"
         required: true
@@ -2060,12 +2060,12 @@ definitions:
       project_name:
         type: "string"
         description: "Project Name"
-      project_owner_id:
+      account_id_team_leader:
         type: "integer"
         format: "int64"
-        description: "Project owner id"
+        description: "Project team leader id"
         readOnly: true
-      secretary_id:
+      account_id_secretary:
         type: "integer"
         format: "int64"
         description: "Project secretary id"
@@ -2175,6 +2175,23 @@ definitions:
         format: "int32"
         description: "Subsystem total score"
     description: "A subsystem object"
+  ProjectUsers:
+    type: "array"
+    description: "Collection of project_users"
+    items:
+      $ref: "#/definitions/ProjectUser"
+  ProjectUser:
+    type: "object"
+    properties:
+      project_id:
+        type: "integer"
+        format: "int64"
+        description: "Project identifier"
+      account_id:
+        type: "integer"
+        format: "int64"
+        description: "Account identifier"
+    description: "A project_users object"
   ProcessDataclassMatrix:
     type: "array"
     description: "Collection of processes X dataclasses"
@@ -2299,15 +2316,15 @@ parameters:
     description: "Session token"
     required: true
     type: "string"
-  project_owner_id:
-    name: "project_owner_id"
+  account_id_team_leader:
+    name: "account_id_team_leader"
     in: "query"
-    description: "Account id of the project owner"
+    description: "Account id of the project team leader"
     required: true
     type: "integer"
     format: "int64"
-  secretary_id:
-    name: "secretary_id"
+  account_id_secretary:
+    name: "account_id_secretary"
     in: "query"
     description: "Account id of the project secretary"
     required: true

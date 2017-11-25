@@ -21,7 +21,10 @@ class Account(Model, Base):
     _account_password = Column(String(65), nullable=True)
     _account_email = Column(String(255), unique=True, nullable=True)
 
-    _projects = relationship("Project", backref="account")
+    #_project_team_leader = relationship("Account", uselist=False, back_populates="account")
+    #_project_secretary = relationship("Account", uselist=False, back_populates="parent")
+    #_team_leader = relationship("Project", uselist=False, back_populates="account")
+    #_secretary = relationship("Project", uselist=False, back_populates="account")
 
     def __init__(self, account_id: int=None, account_username: str=None, account_email: str=None, account_password: str=None):
         """

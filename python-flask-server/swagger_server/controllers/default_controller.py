@@ -141,16 +141,16 @@ def create_process_dataclass_matrix(project_id, process_dataclass_matrix, accoun
     return 'do some magic!'
 
 
-def create_project(name, project_owner_id, secretary_id, account_id_session, token):
+def create_project(name, account_id_team_leader, account_id_secretary, account_id_session, token):
     """
     Create new project
-    
+
     :param name: Name
     :type name: str
-    :param project_owner_id: Account id of the project owner
-    :type project_owner_id: int
-    :param secretary_id: Account id of the project secretary
-    :type secretary_id: int
+    :param account_id_team_leader: Account id of the project team leader
+    :type account_id_team_leader: int
+    :param account_id_secretary: Account id of the project secretary
+    :type account_id_secretary: int
     :param account_id_session: Account id of the session
     :type account_id_session: int
     :param token: Session token
@@ -160,13 +160,16 @@ def create_project(name, project_owner_id, secretary_id, account_id_session, tok
     """
 
     if account_id_session in tokens and tokens[account_id_session] == token:
-        project = Project(project_name=name)
+        project = Project(None, name, account_id_team_leader, account_id_secretary)
         db_session.add(project)
 
-        #try:
-        db_session.commit()
-        #except:
-        #    return None, 500
+        project._account_id_team_leader = account_id_team_leader
+        project._account_id_secretary = account_id_secretary
+
+        try:
+            db_session.commit()
+        except:
+            return None, 500
 
         return None, 201
 
@@ -707,7 +710,17 @@ def list_projects(account_id_session, token):
 
     if account_id_session in tokens and tokens[account_id_session] == token:
         projects = db_session.query(Project).all()
-        return projects, 200
+
+        projectsList = []
+
+        if projects is None:
+            return projectsList, 200
+
+        for project in projects:
+            p = Project(project_id=project.project_id, project_name=project.project_name, account_id_team_leader=project.account_id_team_leader,
+                        account_id_secretary=project.account_id_secretary)
+            projectsList.append(p)
+        return projectsList, 200
 
     return None, 401
 

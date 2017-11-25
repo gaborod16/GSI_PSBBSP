@@ -13,6 +13,7 @@ from .process_dataclass_matrix import ProcessDataclassMatrix
 from .processes import Processes
 from .project import Project
 from .projects import Projects
+from .project_user import ProjectUser
 from .subsystem import Subsystem
 from .subsystems import Subsystems
 from .support_system import SupportSystem

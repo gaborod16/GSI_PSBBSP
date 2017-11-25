@@ -1173,6 +1173,23 @@ definitions:
         type: integer
         format: int32
         description: Subsystem total score
+  ProjectUsers:
+    type: array
+    description: Collection of project_users
+    items:
+      $ref: "#/definitions/ProjectUser"
+  ProjectUser:
+    type: object
+    description: A project_users object
+    properties:
+      project_id:
+        type: integer
+        format: int64
+        description: Project identifier
+      account_id:
+        type: integer
+        format: int64
+        description: Account identifier
   ProcessDataclassMatrix:
     type: array
     description: Collection of processes X dataclasses
