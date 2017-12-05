@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Table, Glyphicon, Col} from 'react-bootstrap';
 
-const ListTableLine = ({index, name, deleteFunc}) => (
+const ListTableLine = ({id, name, deleteFunc}) => (
   <tr>
-    <td>{index}</td>
+    <td>{id}</td>
     <td>{name}</td>
     <td>
       <Col sm={6}>
@@ -15,9 +15,9 @@ const ListTableLine = ({index, name, deleteFunc}) => (
   </tr>
 )
 
-const ListTableLineEdit = ({index, name, editFunc, deleteFunc}) => (
+const ListTableLineEdit = ({id, name, editFunc, deleteFunc}) => (
   <tr>
-    <td>{index}</td>
+    <td>{id}</td>
     <td>{name}</td>
     <td>
       <Col sm={6}>
@@ -47,8 +47,8 @@ class ListTable extends Component {
     if (this.enableEdit) {
       return this.props.data.map((entity) => 
         <ListTableLineEdit
-          key={entity.index}
-          index={entity.index} 
+          key={entity.id}
+          id={entity.id} 
           name={entity.name} 
           editFunc={this.props.editFunc} 
           deleteFunc={this.props.deleteFunc}
@@ -58,8 +58,8 @@ class ListTable extends Component {
     else {
       return this.props.data.map((entity) => 
         <ListTableLine
-          key={entity.index}
-          index={entity.index} 
+          key={entity.id}
+          id={entity.id} 
           name={entity.name} 
           deleteFunc={this.props.deleteFunc}
         />

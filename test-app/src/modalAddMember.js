@@ -12,12 +12,12 @@ class ModalAddMember extends Component {
   }
 
   updateDropdown(index) {
-    this.setState({selectedText: this.props.listUsers[index]});
+    this.setState({selectedText: this.props.listUsers[index].email});
   }
 
   getUsers() {
     return this.props.listUsers.map((user, index) => 
-      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdown}>{user}</MenuItem>
+      <MenuItem key={user.id} eventKey={index} onSelect={this.updateDropdown}>{user.email}</MenuItem>
     );
   }
 

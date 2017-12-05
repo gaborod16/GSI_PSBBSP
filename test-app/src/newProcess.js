@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, Image, ControlLabel, Col, Row, Modal,Table, Glyphicon, Form} from 'react-bootstrap';
+import {Button, FormControl, FormGroup, ControlLabel, Col, Row, Modal,Table, Glyphicon, Form} from 'react-bootstrap';
 
-import TemplateSimple from './template-no-sidebar';
 import Template from './template';
 import CircleGroup from './circleGroup'
 
-const plus = 'assets/plus.png';
+import * as CRUD from './CRUD';
+
+const plus = '/assets/plus.png';
 
 class ListTableLine extends Component {
   constructor() {
     super();
-    this.state={};
+
+    var user = CRUD.getUser();
+
+    this.state={
+      email: user.email,
+      role: '----'
+    };
   }
 
   render() {
@@ -91,7 +98,7 @@ class NewProcess extends Component {
       }
          
     return (
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
         <Row>   
           <Col md={3} sm={4}>
             <p style={seeing}> You're seeing  </p>
@@ -101,8 +108,8 @@ class NewProcess extends Component {
          
         </Row> 
         <Row> 
-          <Col md={3} sm={4}>
-            <h2 >  <small>Create New Process</small></h2>
+          <Col md={4} sm={4}>
+              <CircleGroup name="Add New Process" func={this.openModal} image={plus}/>
           </Col>
 
           <Col md={7} sm={5}>
@@ -130,22 +137,13 @@ class NewProcess extends Component {
                 </tr>
               </thead>
               <tbody>
-                <ListTableLine position="1" name="Something" description="This is the description"/>
-                <ListTableLine position="2" name="Something" description="This is the description"/>
-                <ListTableLine position="3" name="Something" description="This is the description"/>
+                <ListTableLine position="1" name="Process 1" description="Process 1 description"/>
+                <ListTableLine position="2" name="Process 2" description="Process 2 description"/>
+                <ListTableLine position="3" name="Process 3" description="Process 3 description"/>
               </tbody>
             </Table>
           </Col>
         </Row>
-               
-              <Col md={5} sm={12}>
-                <CircleGroup name="Add New Process" func={this.openModal} image={plus}/>
-              </Col>
-              <Col md={10} sm={12}>
-                <Button bsStyle='danger' bsSize='large'  block onClick={this.redirectProjectPage}>
-                    Return
-                </Button>
-              </Col>
            <FormControl.Feedback />
         </FormGroup>
       </Col>

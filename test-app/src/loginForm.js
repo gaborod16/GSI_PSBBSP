@@ -2,21 +2,55 @@ import React, { Component } from 'react';
 import {Button, Well, Col, Form, PageHeader, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 
 import TemplateSimple from './template-no-sidebar';
+import * as CRUD from './CRUD';
 
 class Login extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      email: '',
+      pass: ''
     }
+
+    this.checkLoggedIn();
      
     this.redirectMainPage = this.redirectMainPage.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePass = this.onChangePass.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  checkLoggedIn() {
+    if (CRUD.hasUser()) {
+      console.log("The user is already logged in")
+      this.redirectMainPage();
+    }
   }
     
   redirectMainPage() {     
-    this.props.history.push('./')
+    this.props.history.push('./');
+  }
+
+  onChangeEmail(e) {
+    this.setState({email: e.target.value});
+    console.log(e.target.value);
+  }
+
+  onChangePass(e) {
+    this.setState({pass: e.target.value});
+    console.log(e.target.value);
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+    if(CRUD.verifyLogin(this.state.email, this.state.pass)) {
+      console.log("Fuck yes!");
+      this.redirectMainPage();
+    }
+    else {
+      console.log("Nope")
+    }
   }
 
   render() {
@@ -26,7 +60,7 @@ class Login extends Component {
             <Col smOffset={2}>
               <PageHeader><small>Login form</small></PageHeader>
             </Col>
-            <Form horizontal>
+            <Form horizontal onSubmit={this.handleLogin}>
               <FormGroup controlId="formEmail">
                 <Col componentClass={ControlLabel} sm={2}>
                   E-mail
@@ -34,8 +68,9 @@ class Login extends Component {
                 <Col sm={10}>
                   <FormControl
                     type="text"
-                    defaultValue="" //com deafultvalue fica alteravel
+                    defaultValue="" //com defultvalue fica alteravel
                     placeholder="Enter Username"
+                    onChange={this.onChangeEmail}
                   />
                 </Col>
                   <FormControl.Feedback />
@@ -46,9 +81,10 @@ class Login extends Component {
                 </Col>
                 <Col sm={10}>
                   <FormControl 
-                    type="text"
+                    type="password"
                     defaultValue=""
                     placeholder="Enter Password"
+                    onChange={this.onChangePass}
                   />
                 </Col>
                 <FormControl.Feedback />
@@ -58,7 +94,7 @@ class Login extends Component {
 
               <FormGroup>
                 <Col smOffset={8} sm={4}>
-                  <Button type="submit" bsStyle='danger' bsSize='large' onClick={this.redirectMainPage} block>
+                  <Button type="submit" bsStyle='danger' bsSize='large' block>
                     Login
                   </Button>
                 </Col>

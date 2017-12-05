@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { PageHeader, Col, Grid, Row, Button} from 'react-bootstrap';
+import {Col, Row, Button} from 'react-bootstrap';
 import './template.css';
+
+import * as CRUD from './CRUD';
 
 class SideBar extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      
     }
 
     this.logout = this.props.logout.bind(this);
@@ -22,9 +23,9 @@ class SideBar extends Component {
           <div id="menu">
             <h4 id="menu-header">User Information</h4>
             <hr/>
-            <p>John Doe</p>
-            <p>Role: Admin</p>
             <p>Organization: IBM</p>
+            <p>{this.props.email}</p>
+            <p>Role: {this.props.role}</p>
             <br/>
             <hr/>
             <Button bsStyle='warning' bsSize='small' onClick={this.goBack} block>Go back</Button>
@@ -45,7 +46,8 @@ class Template extends Component {
   }
 
   logout() {
-    this.props.history.push('./login')
+    CRUD.logout();
+    this.props.history.push('/login');
   }
 
   goBack() {
@@ -55,7 +57,7 @@ class Template extends Component {
   render() {
     return (
       <Row>
-        <SideBar logout={this.logout} goBack={this.goBack}/>
+        <SideBar logout={this.logout} goBack={this.goBack} email={this.props.email} role={this.props.role}/>
         <Col lg={10} md={9} sm={9} xs={9}>
           {this.props.children}
         </Col>

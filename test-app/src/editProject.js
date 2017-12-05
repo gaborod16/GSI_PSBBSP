@@ -2,20 +2,28 @@ import React, { Component } from 'react';
 import {PageHeader, Form, Button, Well, FormControl, FormGroup, ControlLabel, Col, MenuItem, DropdownButton, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
 
 import Template from './template'
+import * as CRUD from './CRUD';
 
 class EditProject extends Component {
 
   constructor(props) {
     super(props);
 
-    this.projID = this.props.match.params.proj_id; //USE THIS TO GET THE PROJECT AND FILL FIELDS
+    var user = CRUD.getUser();
+    var projId = this.props.match.params.proj_id;
+    this.project = CRUD.getProject(projId);
+    this.secretary = CRUD.findUser(this.project.secretary);
+    this.teamLeader = CRUD.findUser(this.project.team_leader);
+    console.log(this.project)
     this.state = {
-      user: '',
-      projectName: "My first BSP project",
-      selectedTeamLeader: "Albert Einstein",
-      selectedSecretary: "Mickey Mouse"
+      projectName: this.project.name,
+      selectedTeamLeader: this.secretary.email,
+      selectedSecretary: this.teamLeader.email,
+      email: user.email,
+      role: '----'
     }
-    this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];//this.props.listUsers;
+
+    this.listUsers = CRUD.getUsersInOrg();
     this.redirectMainPage = this.redirectMainPage.bind(this);
     this.updateDropdownSecreatary = this.updateDropdownSecreatary.bind(this);
     this.updateDropdownTeamLeader = this.updateDropdownTeamLeader.bind(this);
@@ -25,22 +33,22 @@ class EditProject extends Component {
   }
 
   updateDropdownTeamLeader(index) {
-    this.setState({selectedTeamLeader: this.listUsers[index]});
+    this.setState({selectedTeamLeader: this.listUsers[index].email});
   }
    
   updateDropdownSecreatary(index) {
-    this.setState({selectedSecretary: this.listUsers[index]});
+    this.setState({selectedSecretary: this.listUsers[index].email});
   }
 
   getUsersForSecretary() {
     return this.listUsers.map((user, index) => 
-      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownSecreatary}>{user}</MenuItem>
+      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownSecreatary}>{user.email}</MenuItem>
     );
   }
 
   getUsersForTeamLeader() {
     return this.listUsers.map((user, index) => 
-      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownTeamLeader}>{user}</MenuItem>
+      <MenuItem key={index} eventKey={index} onSelect={this.updateDropdownTeamLeader}>{user.email}</MenuItem>
     );
   }
 
@@ -51,7 +59,7 @@ class EditProject extends Component {
 
   render() {
     return (
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
         <Col md={10}>
           <Well bsSize='large'>
             <Form horizontal>
@@ -95,7 +103,7 @@ class EditProject extends Component {
 
               <FormGroup>
                 <Col smOffset={8} sm={4}>
-                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectMainPage} block>Create</Button>
+                  <Button type="submit" bsStyle='warning' bsSize='large' onClick={this.redirectMainPage} block>Update</Button>
                 </Col>
               </FormGroup>
             </Form>

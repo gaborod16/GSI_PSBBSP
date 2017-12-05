@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, Image, ControlLabel, Col, Row, ListGroupItem, ListGroup} from 'react-bootstrap';
+import {Col, Row, ListGroupItem, ListGroup} from 'react-bootstrap';
 
 import Template from './template';
 import CircleGroup from './circleGroup'
@@ -8,23 +8,36 @@ import EntityButton from './entityButton'
 import ModalAddMember from './modalAddMember'
 import ModalAddSubs from './modals'
 
-const plus = 'assets/plus.png';
-const lookup = 'assets/lookup.png';
+import * as CRUD from './CRUD';
+
+const plus = '/assets/plus.png';
+const lookup = '/assets/lookup.png';
 
 class ProjectPage extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    var user = CRUD.getUser();
+    this.projId = this.props.match.params.proj_id;
+    this.project = CRUD.getProject(this.projId);
+    this.secretary = CRUD.findUser(this.project.secretary);
+    this.teamLeader = CRUD.findUser(this.project.team_leader);
+    this.members = this.project.members.map((mid) => CRUD.findUser(mid));
+    this.subsystems = CRUD.getSubsystems(this.project.id);
+
+    console.log(this);
+
     this.state = {
-      user: '',
       showModalAddMember: false,
       showModalAddSubs: false,
       tempMemberIndex: -1,
-      tempSubsytemName: ''
+      tempSubsytemName: '',
+      email: user.email,
+      role: '----'
     }
     
-    this.listUsers = ['James Bond', 'Albert Einstein', 'Winston Churchill', 'Peter Pan', 'Mickey Mouse'];
-    this.projName = "My BSP Project";
+    this.listUsers = CRUD.getUsersInOrgNotProj(this.projId);
 
     this.redirectNewProcess = this.redirectNewProcess.bind(this);
     this.redirectNewDataClass = this.redirectNewDataClass.bind(this);
@@ -41,6 +54,7 @@ class ProjectPage extends Component {
     this.addNewSubsystem = this.addNewSubsystem.bind(this);
     this.removeSubsystem = this.removeSubsystem.bind(this);
     this.getSubsystems = this.getSubsystems.bind(this);
+    this.selectSubsystem = this.selectSubsystem.bind(this);
   }
 
   closeModalAddMember() {
@@ -78,27 +92,30 @@ class ProjectPage extends Component {
   addNewSubsystem(e) {
     e.preventDefault();
     this.setState({ showModalAddSubs: false });
+    if (this.state.tempSubsytemName) {
+      CRUD.createSubsystem(this.projId, this.state.tempSubsytemName);
+    }
     console.log(this.state.tempSubsytemName);
   }
     
   redirectNewProcess() {     
-    this.props.history.push('./newProcess');
+    this.props.history.push('./newProcess/');
   }
 
   redirectNewDataClass() {     
-    this.props.history.push('./newDataClass');
+    this.props.history.push('./newDataClass/');
   }
 
-  redirectSubsystemPage() {
-    this.props.history.push('./subsystemPage');
+  redirectSubsystemPage(sid) {
+    this.props.history.push('./subsystemPage/' + sid);
   }
 
   redirectCheckMatrices() {
-    this.props.history.push('./showMatrices');
+    this.props.history.push('./showMatrices/');
   }
 
   redirectProblemsSolutions() {
-    this.props.history.push('./problemsSolutions');
+    this.props.history.push('./problemsSolutions/');
   }
 
   removeSubsystem(index) {
@@ -107,19 +124,24 @@ class ProjectPage extends Component {
     }
   }
 
+  selectSubsystem(sid) {
+    return (e) => {
+      this.redirectSubsystemPage(sid);
+      console.log(sid);
+    };
+  }
+
   getSubsystems() {
-    let listSubsystems = [{name: 'Cluster de recursos', index: 1}, {name: 'Sistema de backups', index: 2}, {name: 'Sistema e monitorização', index: 3}];
-    
-    if (!listSubsystems) {
+    if (!this.subsystems) {
       return <h2><small> Nothing to show </small></h2>
     }
     else {
-      return listSubsystems.map((subs) => 
+      return this.subsystems.map((subs) => 
         <EntityButton
-          key={subs.index}
+          key={subs.id}
           title={subs.name}
-          onClickFunc={this.redirectSubsystemPage}
-          onClickRemoveFunc={this.removeSubsystem(subs.index)}
+          onClickFunc={this.selectSubsystem(subs.id)}
+          onClickRemoveFunc={this.removeSubsystem(subs.id)}
         />
       );
     }
@@ -128,7 +150,7 @@ class ProjectPage extends Component {
   render() {
     return (
 
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
 
         <ModalAddMember 
           title="Add a New Member to the Project"
@@ -149,7 +171,7 @@ class ProjectPage extends Component {
           submitFunc={this.addNewSubsystem}
         />
 
-        <YouSeeing title={"Project: " + this.projName}/>
+        <YouSeeing title={"Project: " + this.project.name}/>
         
         <Row>
           <Col md={3} sm={4} className="circle-create-col">
@@ -168,9 +190,9 @@ class ProjectPage extends Component {
           <Col md={3} sm={4} className="center-text">
             <ListGroup>
               <ListGroupItem disabled>List of members</ListGroupItem>
-              <ListGroupItem header="Team Leader">John Snow</ListGroupItem>
-              <ListGroupItem header="Secretary">Sansa Stark</ListGroupItem>
-              <ListGroupItem header="Member">Arya Stark</ListGroupItem>
+              <ListGroupItem header="Team Leader">{this.teamLeader.email}</ListGroupItem>
+              <ListGroupItem header="Secretary">{this.secretary.email}</ListGroupItem>
+              <ListGroupItem header="Member">{this.members.map((m) => m.email)}</ListGroupItem>
             </ListGroup>
           </Col>
         </Row>

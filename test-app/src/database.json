@@ -1,0 +1,185 @@
+{
+    "data": {
+        "user": {
+            "gabriel@gmail.com": {
+                "id": 2,
+                "email": "gabriel@gmail.com",
+                "pass": "asd"
+            }
+        },
+        "accounts": {
+            "jonhdoe@gmail.com": {
+                "id": 1,
+                "email": "jonhdoe@gmail.com",
+                "pass": "123123123"
+            },
+            "gabriel@gmail.com": {
+                "id": 2,
+                "email": "gabriel@gmail.com",
+                "pass": "asd"
+            },
+            "ze@gmail.com": {
+                "id": 3,
+                "email": "ze@gmail.com",
+                "pass": "asd"
+            },
+            "cena@gmail.com": {
+                "id": 4,
+                "email": "cena@gmail.com",
+                "pass": "asd"
+            },
+            "outracena@gmail.com": {
+                "id": 5,
+                "email": "outracena@gmail.com",
+                "pass": "asd"
+            }
+        },
+        "IBM": {
+            "users": [1,2,3,4],
+            "o_units": [
+                {
+                    "id": 1,
+                    "name": "CIO"
+                },
+                {
+                    "id": 2,
+                    "name": "CEO"
+                },
+                {
+                    "id": 3,
+                    "name": "Head of HR"
+                }
+            ],
+            "supp_systems": [
+                {
+                    "id": 1,
+                    "name": "Web Server"
+                },
+                {
+                    "id": 2,
+                    "name": "Database"
+                },
+                {
+                    "id": 3,
+                    "name": "Cloud Server"
+                },
+                {
+                    "id": 4,
+                    "name": "SMTP Server"
+                }
+            ],
+            "projects": [
+                {
+                    "id": 1,
+                    "name": "My first BSP",
+                    "team_leader": 2,
+                    "secretary": 1,
+                    "members": [3],
+                    "processes": [
+                        {
+                            "id": 1,
+                            "name": "Tesouraria",
+                            "desc": "This is the process number 1"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Marketing",
+                            "desc": "This is the process number 2"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Contabilidade",
+                            "desc": "This is the process number 3"
+                        }
+                    ],
+                    "data_classes": [
+                        {
+                            "id": 1,
+                            "name": "Materiais",
+                            "desc": "This is the data class number 1"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Clientes",
+                            "desc": "This is the data class number 2"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Recursos Humanos",
+                            "desc": "This is the data class number 3"
+                        }
+                    ],
+                    "matrices": {
+                        "DTvsPr": {
+                            "rows": 3,
+                            "cols": 3,
+                            "matrix": [
+                                ["C","U","U"],
+                                ["U","C",""],
+                                ["","",""]
+                            ]      
+                        },
+                        "SSvsOrg": {
+                            "rows": 4,
+                            "cols": 3,
+                            "matrix": [
+                                ["A","",""],
+                                ["A/P","A",""],
+                                ["","","P"],
+                                ["","","P"]
+                            ]
+                        },
+                        "SSvsDT": {
+                            "rows": 4,
+                            "cols": 3,
+                            "matrix": [
+                                ["","X","X"],
+                                ["","X","X"],
+                                ["","","X"],
+                                ["","X",""]
+                            ]
+                        },
+                        "SSvsPr": {
+                            "rows": 4,
+                            "cols": 3,
+                            "matrix": [
+                                ["A","",""],
+                                ["A/P","A",""],
+                                ["","","P"],
+                                ["","","P"]
+                            ]
+                        }
+                    },
+                    "subsystems": [
+                        {
+                            "id": 1,
+                            "name": "subsystem 1",
+                            "description": "This is a new subsystem",
+                            "pairs": [[1,2], [3,1]],
+                            "problems": [
+                                {
+                                    "id": 1,
+                                    "description": "Not enough control on HR",
+                                    "consequences": "The work of employees is unbalanced",
+                                    "solutions": {
+                                        "description": "Hire HR specialist",
+                                        "points": [5,6,8,4,7,9]
+                                    }
+                                },
+                                {
+                                    "id": 2,
+                                    "description": "Problem 2",
+                                    "consequences": "Catastrophic consequence",
+                                    "solutions": {
+                                        "description": "Pray everyday",
+                                        "points": [8,8,5,8,6,0]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }  
+}

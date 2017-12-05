@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { PageHeader, Col, Grid, Row} from 'react-bootstrap';
-import {Switch, Route} from 'react-router-dom';
+import { PageHeader, Grid, Row} from 'react-bootstrap';
+import {Switch, Route, withRouter} from 'react-router-dom';
 
 import './template.css';
 
@@ -19,6 +19,9 @@ import NewDataClass from './newDataClass';
 import Subsystem from './subsystemPage';
 import ProblemsSolutions from './problemsSolutions';
 
+
+import * as CRUD from './CRUD';
+
 class Content extends Component {
   render() {
     return (
@@ -29,19 +32,33 @@ class Content extends Component {
           <Route path={'/listOrganizationUnits'} exact component={ListOrganizationUnits}></Route>
           <Route path={'/listSupportSystems'} exact component={ListSupportSystems}></Route>
           <Route path={path.NEW_PROJECT} exact component={NewProject}></Route>
-          <Route path={'/project/:proj_id'} exact component={EditProject}></Route>
-          <Route path={'/projectPage'} exact component={ProjectPage}></Route>
-          <Route path={'/newProcess'} exact component={NewProcess}></Route>
-          <Route path={'/showMatrices'} exact component={ShowMatrices}></Route>
-          <Route path={'/newDataClass'} exact component={NewDataClass}></Route>
-          <Route path={'/subsystemPage'} exact component={Subsystem}></Route>
-          <Route path={'/problemsSolutions'} exact component={ProblemsSolutions}></Route>
+          <Route path={'/edit_project/:proj_id'} exact component={EditProject}></Route>
+          <Route path={'/project/:proj_id'} exact component={ProjectPage}></Route>
+          <Route path={'/project/:proj_id/newProcess'} exact component={NewProcess}></Route>
+          <Route path={'/project/:proj_id/showMatrices'} exact component={ShowMatrices}></Route>
+          <Route path={'/project/:proj_id/newDataClass'} exact component={NewDataClass}></Route>
+          <Route path={'/project/:proj_id/subsystemPage/:subs_id'} exact component={Subsystem}></Route>
+          <Route path={'/project/:proj_id/problemsSolutions'} exact component={ProblemsSolutions}></Route>
         </Switch>
     );
   }
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log(CRUD.getJSON());
+    this.checkLoggedOut = this.checkLoggedOut.bind(this);
+    this.checkLoggedOut();
+  }
+
+  checkLoggedOut() {
+    if (!CRUD.hasUser()) {
+      console.log("No user logged in")
+      this.props.history.push(path.LOGIN);
+    }
+  }
+
   render() {
     return (
       <Grid fluid>
@@ -54,4 +71,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

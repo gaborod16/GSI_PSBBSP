@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {PageHeader, Form, Checkbox, Col, Button, Accordion, Panel, PanelGroup, FormControl, ListGroup, MenuItem, ListGroupItem, FormGroup, ButtonGroup, DropdownButton, Glyphicon, ControlLabel, Row, ProgressBar} from 'react-bootstrap';
+import {Col, Button, Accordion, Panel, ButtonGroup, Glyphicon, ControlLabel, Row, ProgressBar} from 'react-bootstrap';
 
 import Template from './template';
 import YouSeeing from './youSeeing';
-import CircleGroup from './circleGroup';
-import ListTable from './listTable';
-import ProblemTable from './problemTable';
-
-const plus = 'assets/plus.png';
+// import ProblemTable from './problemTable';
 
 const SpecificScore = ({ scoreName, points, plusFunc, minusFunc }) => (
   <Row>

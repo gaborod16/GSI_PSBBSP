@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {PageHeader, Row, Col, Table, Glyphicon, Button, Modal, Form, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 
 import Template from './template'
 import CircleGroup from './circleGroup'
 import ListTable from './listTable'
 import ModalAdd from './modals'
+
+import * as CRUD from './CRUD';
 
 const plus = 'assets/plus.png';
 
@@ -12,13 +14,18 @@ class ListSupportSystems extends Component {
 
   constructor() {
     super();
+
+    var user = CRUD.getUser();
+
     this.state = {
       showModalAdd: false,
       showModalEdit: false,
-      tempSS: ''
+      tempSS: '',
+      email: user.email,
+      role: '----'
     };
 
-    this.list = [{index: 1, name: 'Web Server'}, {index: 2, name: 'Database'}, {index: 3, name: 'Cloud Server'}];
+    this.list = CRUD.getSupportSystems();
 
     this.closeModal = this.closeModal.bind(this);
     this.openModalAdd = this.openModalAdd.bind(this);
@@ -52,6 +59,9 @@ class ListSupportSystems extends Component {
   addSS(e) {
     e.preventDefault();
     this.setState({ showModalAdd: false });
+    if (this.state.tempSS) {
+      CRUD.createSupportSystem(this.state.tempSS);
+    }
     console.log(this.state.tempSS);
   }
 
@@ -71,7 +81,7 @@ class ListSupportSystems extends Component {
    
   render() {
     return (
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
         <Row>
           <h2 className="center-text"> Your support systems</h2>
         </Row>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col, Image} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 
 import * as path from './paths';
 
@@ -8,15 +8,22 @@ import CircleGroup from './circleGroup'
 import YouSeeing from './youSeeing'
 import EntityButton from './entityButton'
 
-const plus = 'assets/plus.png';
-const lookup = 'assets/lookup.png';
+import * as CRUD from './CRUD';
+
+const plus = '/assets/plus.png';
+const lookup = '/assets/lookup.png';
 
 class MainPage extends Component {
 
   constructor() {
     super();
+
+    var user = CRUD.getUser();
+
     this.state = {
-      user: ''
+      email: user.email,
+      role: '----',
+      projects: CRUD.getProjects()
     }
     
     this.redirectNewProject = this.redirectNewProject.bind(this);
@@ -34,16 +41,16 @@ class MainPage extends Component {
     this.props.history.push(path.NEW_PROJECT)
   }
 
-  redirectEditProject(index) {
-    this.props.history.push('./project/' + index)
+  redirectEditProject(pid) {
+    this.props.history.push('./edit_project/' + pid)
   }
 
   redirectRegister() {
     this.props.history.push(path.REGISTER)
   }
     
-  redirectProjectPage() {
-    this.props.history.push('./projectPage')
+  redirectProjectPage(pid) {
+    this.props.history.push('./project/' + pid + '/')
   }
 
   redirectOUsPage() {
@@ -54,29 +61,36 @@ class MainPage extends Component {
     this.props.history.push('./listSupportSystems')
   }
 
-  editProject(index) {
+  selectProject(pid) {
     return (e) => {
-      this.redirectEditProject(index);
-      console.log(index);
-      
+      this.redirectProjectPage(pid);
+      console.log(pid);
     };
   }
 
-  removeProject(index) {
+  editProject(pid) {
     return (e) => {
-      console.log(index);
+      this.redirectEditProject(pid);
+      console.log(pid);
+    };
+  }
+
+  removeProject(pid) {
+    return (e) => {
+      console.log(pid);
+      CRUD.removeProject(pid);
+      this.forceUpdate();
     }
   }
 
   getProjects() {
-    let listProjects = [{name: 'My first BSP', index: 1}, {name: 'My second BSP', index: 2}, {name: 'BSP test', index: 3}];
-    return listProjects.map((proj) => 
+    return this.state.projects.map((proj) => 
       <EntityButton
-        key={proj.index}
+        key={proj.id}
         title={proj.name}
-        onClickFunc={this.redirectProjectPage}
-        onClickEditFunc={this.editProject(proj.index)}
-        onClickRemoveFunc={this.removeProject(proj.index)}
+        onClickFunc={this.selectProject(proj.id)}
+        onClickEditFunc={this.editProject(proj.id)}
+        onClickRemoveFunc={this.removeProject(proj.id)}
       />
     );
   }
@@ -84,7 +98,7 @@ class MainPage extends Component {
   render() {
     return (
       
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
         <YouSeeing title="Your BSP Projects"/>
         <Row>
           <Col md={3} sm={4} className="circle-create-col">

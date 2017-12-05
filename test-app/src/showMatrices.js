@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, Image, ControlLabel, Col, Row, Table, MenuItem, ButtonGroup, DropdownButton} from 'react-bootstrap';
+import {ControlLabel, Col, Row, Table, MenuItem, ButtonGroup, DropdownButton} from 'react-bootstrap';
 
 import Template from './template';
 import YouSeeing from './youSeeing';
@@ -27,7 +27,7 @@ class Matrix extends Component {
       
        const choices = [];
       
-    if( this.props.type == 1 ) {
+    if( this.props.type === 1 ) {
          choices.length = 0;
       for (var i = 0; i < this.state.numChildren; i += 1) {
           choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("A")}> A </MenuItem>);
@@ -37,7 +37,7 @@ class Matrix extends Component {
       };
     }
     
-    if( this.props.type == 2 ) {
+    if( this.props.type === 2 ) {
         choices.length = 0;
       for (var i = 0; i < this.state.numChildren; i += 1) {
           choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("X")}> X </MenuItem>);
@@ -47,7 +47,7 @@ class Matrix extends Component {
     }
 
     
-   if( this.props.type == 3 ) {
+   if( this.props.type === 3 ) {
        choices.length = 0;
       for (var i = 0; i < this.state.numChildren; i += 1) {
           choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("D")}> D </MenuItem>);
@@ -58,7 +58,7 @@ class Matrix extends Component {
       };
     }
 
-    if( this.props.type == 4 ) {
+    if( this.props.type === 4 ) {
         choices.length = 0;
       for (var i = 0; i < this.state.numChildren; i += 1) {
           choices.push(<MenuItem key={1} eventKey={1} onClick={this.onPress("U")}> U </MenuItem>);
@@ -74,26 +74,26 @@ class Matrix extends Component {
         <thead>
           <tr>
             <th className="tableHeader">{this.props.gsi}</th>
-            <th className="tableHeader"> #1 </th>
-            <th className="tableHeader"> #2 </th>
-            <th className="tableHeader"> #3 </th>
+            <th className="tableHeader"> Process 1 </th>
+            <th className="tableHeader"> Process 2 </th>
+            <th className="tableHeader"> Process 3 </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="tableHeader"> #1 </td>
+            <td className="tableHeader"> Data class 1 </td>
             <td> <DropdownButton title={this.state.dropTitle} id="dropdown-size-small" block> {choices} </DropdownButton> </td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td className="tableHeader"> #2 </td>
+            <td className="tableHeader"> Data class 2 </td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td className="tableHeader"> #3 </td>
+            <td className="tableHeader"> Data class 3 </td>
             <td></td>
             <td></td>
             <td></td>

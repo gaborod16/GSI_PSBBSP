@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "fs": "0.0.1-security",
+    "jsonfile": "^4.0.0",
     "node-modules": "^1.0.1",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
@@ -20,5 +22,8 @@
     "build": "react-scripts build --history-api-falback",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "json-loader": "file:node_modules\\json-loader"
   }
 }

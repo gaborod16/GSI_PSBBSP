@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {PageHeader, Row, Col, Table, Glyphicon, Button, Modal, Form, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 
 import Template from './template'
 import CircleGroup from './circleGroup'
 import ListTable from './listTable'
 import ModalAdd from './modals'
+
+import * as CRUD from './CRUD';
 
 const plus = 'assets/plus.png';
 
@@ -12,13 +14,18 @@ class ListOrganizationUnits extends Component {
 
   constructor() {
     super();
+
+    var user = CRUD.getUser();
+
     this.state = {
       showModalAdd: false,
       showModalEdit: false,
-      tempOU: ''
+      tempOU: '',
+      email: user.email,
+      role: '----'
     };
 
-    this.list = [{index: 1, name: 'CIO'}, {index: 2, name: 'CEO'}, {index: 3, name: 'HR'}];
+    this.list = CRUD.getOrgUnits();
 
     this.closeModal = this.closeModal.bind(this);
     this.openModalAdd = this.openModalAdd.bind(this);
@@ -52,6 +59,9 @@ class ListOrganizationUnits extends Component {
   addOU(e) {
     e.preventDefault();
     this.setState({ showModalAdd: false });
+    if (this.state.tempOU) {
+      CRUD.createOrgUnit(this.state.tempOU);
+    }
     console.log(this.state.tempOU);
   }
 
@@ -64,14 +74,16 @@ class ListOrganizationUnits extends Component {
   deleteOU(e) {
     console.log(e.target);
   }
+
+
     
   redirectMainPage() {
-    this.props.history.push('./')
+    this.props.history.push('/')
   }
    
   render() {
     return (
-      <Template history={this.props.history}>
+      <Template history={this.props.history} email={this.state.email} role={this.state.role}>
         <Row>
           <h2 className="center-text"> Your Organization Units</h2>
         </Row>

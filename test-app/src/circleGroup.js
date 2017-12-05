@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Well, FormControl, FormGroup, ControlLabel, Row, Col, Image} from 'react-bootstrap';
+import {Row, Col, Image} from 'react-bootstrap';
 
 class CircleGroup extends Component {
   constructor() {
